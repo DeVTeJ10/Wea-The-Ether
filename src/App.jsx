@@ -1,33 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route } from 'react-router-dom';
+import HomePage from "./pages/home/homePage"
+import AboutUsPage from "./pages/aboutUs/aboutUsPage"
+import PropertiesPage from "./pages/properties/propertiesPage"
+import ServicesPage from "./pages/services/servicesPage"
+import ForgotPasswordPage from "./pages/forgotPassword/forgotPassword"
+import ResetPasswordPage from "./pages/resetPassword/resetPassword"
+import CreatePost from "./pages/createPost/createPost"
+import SignupPage from "./Auth/Signup/signup"
+import LoginPage from "./Auth/Login/login"
+
+
+
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      <Routes>
+        <Route path="/" element={<HomePage/>} />
+        <Route path="/about-us" element={<AboutUsPage/>} />
+        <Route path="/properties-page/:id" element={<PropertiesPage/>} />
+        <Route path="/services-page" element={<ServicesPage/>} />
+        <Route path="/signup" element={<SignupPage/>} />
+        <Route path="/login" element={<LoginPage/>} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage/>} />
+        <Route path="/reset-password/:token" element={<ResetPasswordPage/>} />
+        <Route path="/create-post" element={<CreatePost/>} />
+      </Routes>
     </>
   )
 }
