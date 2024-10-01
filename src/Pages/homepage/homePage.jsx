@@ -74,33 +74,26 @@ const homePage = () => {
         <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
         <h3 className="degrees">20C</h3>
         <h3 className="degrees">Friday, 1st Oct</h3>
-        </div>
-        <div className="weekdaystempo">
+    </div>
+    <div className="weekdaystempo">
         <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
         <h3 className="degrees">20C</h3>
         <h3 className="degrees">Saturday, 1st Oct</h3>
-        </div>
-        <div className="weekdaystempo">
+    </div>
+    <div className="weekdaystempo">
         <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
         <h3 className="degrees">20C</h3>
         <h3 className="degrees">Sunday, 1st Oct</h3>
-        </div>
-        <div className="weekdaystempo">
+    </div>
+    <div className="weekdaystempo">
         <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
         <h3 className="degrees">20C</h3>
         <h3 className="degrees">Monday, 1st Oct</h3>
-        </div>
+    </div>
     </div>
 
-    <h3 className="forehour">Hourly Forecast</h3>
+             <h3 className="forehour">Hourly Forecast</h3>
     <div className="forecasthour">
-    <div className="Hourlyforecast">
-            <h3>00:00</h3>
-            <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
-            <h3 className="hourly">00c</h3>
-            <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
-            <h3 className="hourly">0km/hr</h3>
-        </div>
         <div className="Hourlyforecast">
             <h3>00:00</h3>
             <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
@@ -129,6 +122,13 @@ const homePage = () => {
             <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
             <h3 className="hourly">0km/hr</h3>
         </div>
+        <div className="Hourlyforecast">
+            <h3>00:00</h3>
+            <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
+            <h3 className="hourly">00c</h3>
+            <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
+            <h3 className="hourly">0km/hr</h3>
+    </div>
     </div>
     </div>
     </div>
