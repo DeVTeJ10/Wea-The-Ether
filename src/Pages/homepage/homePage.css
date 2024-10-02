@@ -74,10 +74,10 @@
 .degrees{
     color: white;
 }
-/* 
-.weektemperature{
 
-} */
+.weektemperature{
+    border: 2px solid white;
+}
 
 .hourly{
     color: white;
