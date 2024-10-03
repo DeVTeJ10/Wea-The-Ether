@@ -67,7 +67,11 @@ const homePage = () => {
                 </div>
                 </div>
 
-            <h1>5 days forcast</h1>
+            <div className="hourlydayforcaster">
+            <h1 className="forcaster">5 days forcast</h1>
+            <h3 className="forehour">Hourly Forecast</h3>
+            </div>
+        
                 <div className="finaltemp">
                     <div className="weektemperature">
                     <div className="weekdaystempo">
@@ -92,7 +96,6 @@ const homePage = () => {
                     </div>
                     </div>
 
-                            <h3 className="forehour">Hourly Forecast</h3>
                     <div className="forecasthour">
                         <div className="Hourlyforecast">
                             <h3>00:00</h3>
