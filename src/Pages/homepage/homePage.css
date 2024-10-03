@@ -98,7 +98,19 @@
 
 .finaltemp{
     display: flex;
-    gap: 60px;
+    gap: 300px;
     justify-content: center;
+    margin-top: 30px;
+}
 
+.forcaster{
+    padding-left: 200px;
+    color: white;
+}
+
+.hourlydayforcaster{
+    display: flex;
+    align-items: center;
+    gap: 300px;
+    margin-top: 20px;
 }
