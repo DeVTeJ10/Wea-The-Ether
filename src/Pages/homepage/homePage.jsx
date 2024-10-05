@@ -3,9 +3,38 @@ import weatherlogo from "../../images/Suns.png";
 import weatherlogo2 from "../../images/humidity.png"
 import windspeed from "../../images/windspeed.png"
 import pressure from "../../images/pressure.png"
+import { useState, useEffect } from "react";
+import axios from "axios";
+// navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+
+
 
 
 const homePage = () => {
+
+
+    const [weather, setWeather] = useState();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <div>
 
@@ -16,7 +45,7 @@ const homePage = () => {
                 className="inputcity"></input>
         </div> */}
                 <div className="checktemps">
-                <div>
+                <div className="detailsofcity">
                     <div className="detailscity">
                         <div className="citydetails">
                             <h2>City name</h2>

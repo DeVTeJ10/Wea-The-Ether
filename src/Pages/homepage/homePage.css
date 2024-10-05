@@ -16,7 +16,7 @@
 
 .citydetails{
     color: white;
-    border: 2px solid white;
+    border: 0.3px solid white;
     border-color: white;
     border-radius: 50px;
     padding-left: 40px;
@@ -41,7 +41,7 @@
 }
 
 .detailsDay{
-    border: 2px solid white;
+    border: 0.3px solid white;
     border-radius: 20px;
     padding-left: 30px;
     padding-right: 30px;
@@ -52,7 +52,7 @@
     display: flex;
     gap: 200px;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 0px;
     padding-top: 40px;
 }
 
@@ -136,3 +136,6 @@
     margin-top: 40px;
 }
 
+.detailsofcity{
+    margin-top: 50px;
+}
