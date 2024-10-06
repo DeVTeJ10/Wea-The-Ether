@@ -2,16 +2,21 @@
     width: 200px;
     height: 42px;
     border-radius: 30px;
-    display: flex;
+    /* display: flex; */
     border: 0px;
     font-size: 15px;
-    margin-top: 30px;
+    margin-top: 20px;
     padding-left: 20px;
+    /* margin-bottom: -1200px; */
+    /* margin-left: 240px; */
+
 }
 
 .weatherwe{
-    display: flex;
-    justify-content: center;
+    /* display: flex; */
+    margin-bottom: -70px;
+    margin-left: 240px;
+
 }
 
 .citydetails{
@@ -119,7 +124,7 @@
     align-items: center;
     gap: 140px;
     justify-content: center;
-    margin-top: 0px;
+    margin-top: -20px;
     color: white;
     padding-left: 80px;
 }
@@ -133,7 +138,8 @@
     display: flex;
     align-items: center;
     gap: 530px;
-    margin-top: 40px;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .detailsofcity{

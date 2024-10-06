@@ -38,12 +38,14 @@ const homePage = () => {
   return (
     <div>
 
-        {/* <div className="weatherwe">
-                <input placeholder="City" 
+
+        <div className="weatherwe">
+                <input placeholder="Input City" 
                 width={803} 
                 height={64} 
-                className="inputcity"></input>
-        </div> */}
+                className="inputcity"
+                type="text"></input>
+        </div>
                 <div className="checktemps">
                 <div className="detailsofcity">
                     <div className="detailscity">
