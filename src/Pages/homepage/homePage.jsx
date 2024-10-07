@@ -3,7 +3,7 @@ import weatherlogo from "../../images/Suns.png";
 import weatherlogo2 from "../../images/humidity.png"
 import windspeed from "../../images/windspeed.png"
 import pressure from "../../images/pressure.png"
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import axios from "axios";
 // navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 
@@ -14,22 +14,28 @@ const homePage = () => {
 
 
     const [weather, setWeather] = useState();
+    const [loading, setLoading] = useState(true)
+    const apiKey = 'yxSrkwCMI81m1rO1ODU19ZImwm4iiYFV'
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    const fetchData = async () => {
+        try {
+          const response = await axios.get('https://api.tomorrow.io/v4/weather/realtime', {
+            headers: {
+                accept: 'application/json',
+                Authorization: `Bearer ${apiKey}`
+            }
+            
+          });
+          setWeather(response?.data)
+          setLoading(false)
+          console.log(response.data);
+        } catch (error) {
+            setLoading(true)
+          console.log(error);
+        }
+      };
 
 
 
@@ -38,14 +44,15 @@ const homePage = () => {
   return (
     <div>
 
-
         <div className="weatherwe">
                 <input placeholder="Input City" 
                 width={803} 
                 height={64} 
                 className="inputcity"
                 type="text"></input>
+            <button className="weathercall">Enter</button>
         </div>
+
                 <div className="checktemps">
                 <div className="detailsofcity">
                     <div className="detailscity">
