@@ -3,7 +3,7 @@ import weatherlogo from "../../images/Suns.png";
 import weatherlogo2 from "../../images/humidity.png"
 import windspeed from "../../images/windspeed.png"
 import pressure from "../../images/pressure.png"
-import { useState} from "react";
+import { useState } from "react";
 import axios from "axios";
 // navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 
@@ -13,20 +13,31 @@ import axios from "axios";
 const homePage = () => {
 
 
-    const [weather, setWeather] = useState();
+    const [weather, setWeather] = useState('');
     const [loading, setLoading] = useState(true)
     const apiKey = 'yxSrkwCMI81m1rO1ODU19ZImwm4iiYFV'
 
 
 
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        fetchData();  // Call function to send data to API
+      };
+
+
+      const handleChange = (e) => {
+        setWeather(e.target.value);  // Update state with input value
+      };
+
     const fetchData = async () => {
         try {
           const response = await axios.get('https://api.tomorrow.io/v4/weather/realtime', {
             headers: {
-                accept: 'application/json',
-                Authorization: `Bearer ${apiKey}`
+                // accept: 'application/json',
+                Authorization: `${apiKey}`,
+                weather: weather
             }
-            
           });
           setWeather(response?.data)
           setLoading(false)
@@ -37,7 +48,7 @@ const homePage = () => {
         }
       };
 
-
+      fetchData()
 
 
 
@@ -45,12 +56,16 @@ const homePage = () => {
     <div>
 
         <div className="weatherwe">
+        <form onSubmit={handleSubmit} autoComplete='on'>
                 <input placeholder="Input City" 
+                onChange={handleChange}
+                value={weather}
                 width={803} 
                 height={64} 
                 className="inputcity"
                 type="text"></input>
-            <button className="weathercall">Enter</button>
+            </form>
+            <button className="weathercall" type="submit" onClick={fetchData}>Enter</button>
         </div>
 
                 <div className="checktemps">
