@@ -5,50 +5,58 @@ import windspeed from "../../images/windspeed.png"
 import pressure from "../../images/pressure.png"
 import { useState } from "react";
 import axios from "axios";
-// navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 
 
 
 
-const homePage = () => {
+
+const HomePage = () => {
 
 
-    const [weather, setWeather] = useState('');
-    const [loading, setLoading] = useState(true)
-    const apiKey = 'yxSrkwCMI81m1rO1ODU19ZImwm4iiYFV'
+    const [weatherInput, setWeatherInput] = useState('');  // Handle the input value
+    const [weatherData, setWeatherData] = useState(null);  // Handle the api call value
+    const [loading, setLoading] = useState(true)  // Handle the loading gif
+    const apiKey = '8502a3cf3eb809105bc833b6c2c81e2d'
+
+    console.log('API Key:', apiKey);
+
 
 
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        // weatherInput('')
         fetchData();  // Call function to send data to API
       };
 
 
       const handleChange = (e) => {
-        setWeather(e.target.value);  // Update state with input value
+        setWeatherInput(e.target.value);  // Update state with input value
       };
 
     const fetchData = async () => {
         try {
-          const response = await axios.get('https://api.tomorrow.io/v4/weather/realtime', {
+          const response = await axios.get("https://api.openweathermap.org/data/2.5/weather", {
             headers: {
-                // accept: 'application/json',
-                Authorization: `${apiKey}`,
-                weather: weather
-            }
+                accept: 'application/json',
+            },
+
           });
-          setWeather(response?.data)
-          setLoading(false)
-          console.log(response.data);
-        } catch (error) {
+        //   .then((response) => {
+            console.log('location', response);  // Add semicolon if missing
+            setWeatherData(response?.data?.location);
+            setLoading(false);
+        // })
+        } catch(error) {
+            console.error(error);
             setLoading(true)
-          console.log(error);
         }
       };
 
       fetchData()
+
+
 
 
 
@@ -58,14 +66,16 @@ const homePage = () => {
         <div className="weatherwe">
         <form onSubmit={handleSubmit} autoComplete='on'>
                 <input placeholder="Input City" 
+                id="weather"
                 onChange={handleChange}
-                value={weather}
+                value={weatherInput}
                 width={803} 
                 height={64} 
                 className="inputcity"
-                type="text"></input>
+                type="text">
+                </input>
+            <button className="weathercall" type="submit">Enter</button>
             </form>
-            <button className="weathercall" type="submit" onClick={fetchData}>Enter</button>
         </div>
 
                 <div className="checktemps">
@@ -196,4 +206,4 @@ const homePage = () => {
   );
 };
 
-export default homePage;
+export default HomePage;
