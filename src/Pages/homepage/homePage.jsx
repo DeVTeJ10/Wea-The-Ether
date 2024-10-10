@@ -38,9 +38,9 @@ const HomePage = () => {
     const fetchData = async () => {
         try {
           const response = await axios.get("https://api.openweathermap.org/data/2.5/weather", {
-            headers: {
-                accept: 'application/json',
-            },
+            // headers: {
+            //     // accept: 'application/json',
+            // },
 
           });
         //   .then((response) => {
@@ -65,7 +65,8 @@ const HomePage = () => {
 
         <div className="weatherwe">
         <form onSubmit={handleSubmit} autoComplete='on'>
-                <input placeholder="Input City" 
+            <div className="longlati">
+            <input placeholder="Input latitude" 
                 id="weather"
                 onChange={handleChange}
                 value={weatherInput}
@@ -74,7 +75,17 @@ const HomePage = () => {
                 className="inputcity"
                 type="text">
                 </input>
-            <button className="weathercall" type="submit">Enter</button>
+                <input placeholder="Input longitude"
+                id="weather"
+                onChange={handleChange}
+                value={weatherInput}
+                width={803}
+                height={64}
+                className="inputcity"
+                type="text">
+            </input>
+            </div>
+            {/* <button className="weathercall" type="submit">Enter</button> */}
             </form>
         </div>
 
