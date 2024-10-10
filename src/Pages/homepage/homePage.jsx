@@ -3,9 +3,8 @@ import weatherlogo from "../../images/Suns.png";
 import weatherlogo2 from "../../images/humidity.png"
 import windspeed from "../../images/windspeed.png"
 import pressure from "../../images/pressure.png"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-
 
 
 
@@ -16,9 +15,9 @@ const HomePage = () => {
     const [weatherInput, setWeatherInput] = useState('');  // Handle the input value
     const [weatherData, setWeatherData] = useState(null);  // Handle the api call value
     const [loading, setLoading] = useState(true)  // Handle the loading gif
-    const apiKey = '8502a3cf3eb809105bc833b6c2c81e2d'
+    const apiKey = 'b96e0a473aed03ed2ffcdd3d32e5f323'
 
-    console.log('API Key:', apiKey);
+    // console.log('API Key:', apiKey);
 
 
 
@@ -31,30 +30,31 @@ const HomePage = () => {
       };
 
 
-      const handleChange = (e) => {
+    const handleChange = (e) => {
         setWeatherInput(e.target.value);  // Update state with input value
       };
 
+
+      useEffect(() => {
+        fetchData();
+    }, [`${apiKey}`]); // Empty dependency array ensures this runs only once
+    
+
+      
+
+
     const fetchData = async () => {
         try {
-          const response = await axios.get("https://api.openweathermap.org/data/2.5/weather", {
-            // headers: {
-            //     // accept: 'application/json',
-            // },
-
-          });
-        //   .then((response) => {
+          const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${weatherInput}&appid=${apiKey}`);
             console.log('location', response);  // Add semicolon if missing
-            setWeatherData(response?.data?.location);
+            setWeatherData(response?.data);
             setLoading(false);
-        // })
         } catch(error) {
             console.error(error);
             setLoading(true)
         }
       };
 
-      fetchData()
 
 
 
@@ -66,7 +66,7 @@ const HomePage = () => {
         <div className="weatherwe">
         <form onSubmit={handleSubmit} autoComplete='on'>
             <div className="longlati">
-            <input placeholder="Input latitude" 
+            <input placeholder="Input city" 
                 id="weather"
                 onChange={handleChange}
                 value={weatherInput}
@@ -75,17 +75,8 @@ const HomePage = () => {
                 className="inputcity"
                 type="text">
                 </input>
-                <input placeholder="Input longitude"
-                id="weather"
-                onChange={handleChange}
-                value={weatherInput}
-                width={803}
-                height={64}
-                className="inputcity"
-                type="text">
-            </input>
             </div>
-            {/* <button className="weathercall" type="submit">Enter</button> */}
+            <button className="weathercall" type="submit">Enter</button>
             </form>
         </div>
 
