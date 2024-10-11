@@ -3,29 +3,22 @@ import weatherlogo from "../../images/Suns.png";
 import weatherlogo2 from "../../images/humidity.png"
 import windspeed from "../../images/windspeed.png"
 import pressure from "../../images/pressure.png"
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 
-
-
 const HomePage = () => {
-
 
     const [weatherInput, setWeatherInput] = useState('');  // Handle the input value
     const [weatherData, setWeatherData] = useState(null);  // Handle the api call value
     const [loading, setLoading] = useState(true)  // Handle the loading gif
     const apiKey = 'b96e0a473aed03ed2ffcdd3d32e5f323'
 
-    // console.log('API Key:', apiKey);
-
-
 
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // weatherInput('')
         fetchData();  // Call function to send data to API
       };
 
@@ -34,13 +27,7 @@ const HomePage = () => {
         setWeatherInput(e.target.value);  // Update state with input value
       };
 
-
-      useEffect(() => {
-        fetchData();
-    }, [`${apiKey}`]); // Empty dependency array ensures this runs only once
     
-
-      
 
 
     const fetchData = async () => {
@@ -53,9 +40,8 @@ const HomePage = () => {
             console.error(error);
             setLoading(true)
         }
+
       };
-
-
 
 
 
@@ -70,8 +56,6 @@ const HomePage = () => {
                 id="weather"
                 onChange={handleChange}
                 value={weatherInput}
-                width={803} 
-                height={64} 
                 className="inputcity"
                 type="text">
                 </input>
@@ -80,6 +64,8 @@ const HomePage = () => {
             </form>
         </div>
 
+
+        {loading}
                 <div className="checktemps">
                 <div className="detailsofcity">
                     <div className="detailscity">
