@@ -65,7 +65,11 @@ const HomePage = () => {
         </div>
 
 
-        {loading}
+        {/* {loading} */}
+
+            {Object.entries(weatherData).map(([key, value], index) => (
+                <Div key={index}></Div>
+            ))}
                 <div className="checktemps">
                 <div className="detailsofcity">
                     <div className="detailscity">
