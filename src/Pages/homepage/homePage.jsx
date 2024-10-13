@@ -9,8 +9,8 @@ import axios from "axios";
 
 const HomePage = () => {
 
-    const [weatherInput, setWeatherInput] = useState('');  // Handle the input value
-    const [weatherData, setWeatherData] = useState(null);  // Handle the api call value
+    const [weatherInput, setWeatherInput] = useState("");  // Handle the input value
+    const [weatherData, setWeatherData] = useState("");  // Handle the api call value
     const [loading, setLoading] = useState(true)  // Handle the loading gif
     const apiKey = 'b96e0a473aed03ed2ffcdd3d32e5f323'
 
@@ -35,6 +35,7 @@ const HomePage = () => {
           const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${weatherInput}&appid=${apiKey}`);
             console.log('location', response);  // Add semicolon if missing
             setWeatherData(response?.data);
+            console.log(weatherData)
             setLoading(false);
         } catch(error) {
             console.error(error);
@@ -64,22 +65,21 @@ const HomePage = () => {
             </form>
         </div>
 
-
-        {/* {loading} */}
-
-            {Object.entries(weatherData).map(([key, value], index) => (
-                <Div key={index}></Div>
-            ))}
+           
                 <div className="checktemps">
-                <div className="detailsofcity">
+                {Object.entries(weatherData).map(([id, product]) => (
+                <div className="detailsofcity" key={id}>
                     <div className="detailscity">
                         <div className="citydetails">
-                            <h2>City name</h2>
+                            <h2>{product}</h2>
                             <h1>00:00</h1>
                             <h4>Monday, 30th September</h4>
                         </div>
                     </div>
                 </div>
+                ))}
+
+
 
                 <div className="detailsDay">
                 <div className="daysdetails">
