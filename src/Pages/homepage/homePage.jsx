@@ -41,7 +41,6 @@ const HomePage = () => {
             console.error(error);
             setLoading(true)
         }
-
       };
 
 
@@ -65,25 +64,34 @@ const HomePage = () => {
             </form>
         </div>
 
-           
+
                 <div className="checktemps">
-                {Object.entries(weatherData).map(([id, product]) => (
-                <div className="detailsofcity" key={id}>
+                <div className="detailsofcity" >
                     <div className="detailscity">
-                        <div className="citydetails">
-                            <h2>{product}</h2>
-                            <h1>00:00</h1>
-                            <h4>Monday, 30th September</h4>
+        {Object.entries(weatherData).map(([id, product]) => (
+                        <div className="citydetails" key={id}>
+                            <h2>{product.icon}</h2>
+                            <h1>{product.all}</h1>
+                            <h4>{product.lon}</h4> 
+                            <h4>{product.sunrise}</h4>
+                            <h4>{product.sunset}</h4>
+                            <h4>{product.country}</h4>
+                            <h4>{product.lat}</h4>
+                            <h4>{product.type}</h4>
+                            <h4>{product.speed}</h4>
+                            <h4>{product.deg}</h4>
+                            <h4>{product.gust}</h4>
+                            <h4>{product.description}</h4>
+                            <h4>{product.message}</h4> 
                         </div>
+                 ))} 
                     </div>
                 </div>
-                ))}
 
 
 
                 <div className="detailsDay">
                 <div className="daysdetails">
-
                 <div>
                 <h1>00C</h1>
                     <div className="sunrise">
@@ -121,6 +129,8 @@ const HomePage = () => {
                 </div>
                 </div>
                 </div>
+
+                    
 
             <div className="hourlydayforcaster">
             <h3 className="forcaster">5 days forecast</h3>
@@ -194,7 +204,7 @@ const HomePage = () => {
                         </div>
                 </div>
                     </div>
-    </div>
+                    </div>
   );
 };
 
