@@ -10,39 +10,37 @@ import axios from "axios";
 const HomePage = () => {
 
     const [weatherInput, setWeatherInput] = useState("");  // Handle the input value
-    const [weatherData, setWeatherData] = useState("");  // Handle the api call value
+    const [weatherData, setWeatherData] = useState(null);  // Handle the api call value
     const [loading, setLoading] = useState(true)  // Handle the loading gif
+    const [hasSearched, setHasSearched] = useState(false); // Track if the user searched
+    const [error, setError] = useState(null); // Track errors
     const apiKey = 'b96e0a473aed03ed2ffcdd3d32e5f323'
 
 
 
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        fetchData();  // Call function to send data to API
-      };
-
-
-    const handleChange = (e) => {
+    const handleInputChange = (e) => {
         setWeatherInput(e.target.value);  // Update state with input value
       };
 
-    
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setHasSearched(true); // Mark that the user has searched
 
-    const fetchData = async () => {
         try {
-          const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${weatherInput}&appid=${apiKey}`);
-            console.log('location', response);  // Add semicolon if missing
-            setWeatherData(response?.data);
-            console.log(weatherData)
-            setLoading(false);
-        } catch(error) {
-            console.error(error);
-            setLoading(true)
-        }
+            const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${weatherInput}&appid=${apiKey}`);
+              console.log('location', response);  // Add semicolon if missing
+              setWeatherData(response?.data);
+              console.log(weatherData)
+              setLoading(false);
+              setError(null); // Clear any previous errors
+          } catch(error) {
+              console.error(error);
+              setError('Could not fetch data. Please try again.'); // Clear any previous errors
+              setLoading(true)
+              setWeatherData(null)
+          }
       };
-
 
 
 
@@ -54,7 +52,7 @@ const HomePage = () => {
             <div className="longlati">
             <input placeholder="Input city" 
                 id="weather"
-                onChange={handleChange}
+                onChange={handleInputChange}
                 value={weatherInput}
                 className="inputcity"
                 type="text">
@@ -65,26 +63,20 @@ const HomePage = () => {
         </div>
 
 
+        {/* Display error if there's any */}
+      {error && <p>{error}</p>}
+
                 <div className="checktemps">
                 <div className="detailsofcity" >
                     <div className="detailscity">
-        {Object.entries(weatherData).map(([id, product]) => (
-                        <div className="citydetails" key={id}>
-                            <h2>{product.icon}</h2>
-                            <h1>{product.all}</h1>
-                            <h4>{product.lon}</h4> 
-                            <h4>{product.sunrise}</h4>
-                            <h4>{product.sunset}</h4>
-                            <h4>{product.country}</h4>
-                            <h4>{product.lat}</h4>
-                            <h4>{product.type}</h4>
-                            <h4>{product.speed}</h4>
-                            <h4>{product.deg}</h4>
-                            <h4>{product.gust}</h4>
-                            <h4>{product.description}</h4>
-                            <h4>{product.message}</h4> 
+        {/* {Object.entries(weatherData).map(([id, product]) => ( */}
+                        <div className="citydetails" >
+                        {/* <div className="citydetails"> */}
+                            <h2>Good morning </h2>
+                            <h1>Lagos</h1>
+                            <h4>00:00</h4> 
                         </div>
-                 ))} 
+                {/* //  ))} */}
                     </div>
                 </div>
 
