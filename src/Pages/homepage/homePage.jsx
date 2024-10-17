@@ -16,8 +16,7 @@ const HomePage = () => {
 
  
  
- 
- 
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         fetchData();  // Call function to send data to API
