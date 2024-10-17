@@ -13,6 +13,7 @@ const HomePage = () => {
     const [weatherData, setWeatherData] = useState({});  // Handle the api call value
     // const [loading, setLoading] = useState(true)  // Handle the loading gif
     const apiKey = 'b96e0a473aed03ed2ffcdd3d32e5f323'
+
  
  
  
@@ -32,13 +33,13 @@ const HomePage = () => {
  
     const fetchData = async () => {
         if (!weatherInput) return;  // Prevent fetching if no input
+
         try {
           const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${weatherInput}&appid=${apiKey}`);
             console.log('location', response);  // Add semicolon if missing
             setWeatherData(response.data);
             setWeatherInput("")
             console.log(response)
-            // setLoading(false);
         } catch(error) {
             console.error(error);
             // setLoading(true)
@@ -51,6 +52,7 @@ const HomePage = () => {
             fetchData();  // Fetch data whenever 'Input' changes
         }
     }, [weatherInput]);
+
  
  
  
@@ -72,34 +74,31 @@ const HomePage = () => {
             </form>
         </div>
  
- 
                 <div className="checktemps">
                 <div className="detailsofcity" >
                     <div className="detailscity">
                         <div className="citydetails">
                             <h2>Todays Lat in {weatherData?.name} is: {weatherData?.coord?.lat}</h2>
-                            <h1>00:00</h1>
+                            <h1>{weatherData?.weather?.[0]?.description}</h1>
                             <h4>Wed, 16th 2024</h4>
                         </div>
                     </div>
                 </div>
  
  
- 
                 <div className="detailsDay">
                 <div className="daysdetails">
- 
                 <div>
                 <h1>00C</h1>
                     <div className="sunrise">
-                        <h4>Sunrise</h4>
-                        <h4>00:00</h4>
+                        <h4>Sunrise:</h4>
+                        <h4>{weatherData?.sys?.sunrise}</h4>
                     </div>
                     <div className="sunset">
-                        <h4>Sunset</h4>
-                        <h4>00:00</h4>
+                        <h4>Sunset:</h4>
+                        <h4>{weatherData?.sys?.sunset}</h4>
                     </div>
-                    <h3>Feels like: 00C</h3>
+                    <h3>Feels like: {weatherData?.main?.temp}</h3>
                 </div>
  
                 <div>
@@ -109,16 +108,16 @@ const HomePage = () => {
  
                 <div>
                     <img src={weatherlogo2} width={30.72} height={30.72} alt="Star 3" />
-                    <h3>00%</h3>
-                    <h4>humidity</h4>
+                    <h3>{weatherData?.main?.humidity}</h3>
+                    <h4>humidity is </h4>
                     <img src={pressure} width={30.72} height={30.72} alt="Star 3" />
-                    <h3>26492</h3>
-                    <h4>Pressure</h4>
+                    <h3>{weatherData?.main?.pressure}</h3>
+                    <h4>Pressure is </h4>
                 </div>
                 <div>
                     <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
-                    <h3>00%</h3>
-                    <h4>windspeed</h4>
+                    <h3>{weatherData?.wind?.speed}</h3>
+                    <h4>windspeed is </h4>
                     <img src={pressure} width={30.72} height={30.72} alt="Star 3" />
                     <h3>26492</h3>
                     <h4>UV</h4>
