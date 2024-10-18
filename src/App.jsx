@@ -3,7 +3,7 @@ import HomePage from './Pages/homepage/HomePage';
 
 
 
-
+console.log("testing...")
 
 
 function App() {
