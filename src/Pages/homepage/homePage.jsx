@@ -188,7 +188,7 @@ const HomePage = () => {
                             <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
                             <h3 className="hourly">0km/hr</h3>
                         </div>
-                        <div className="Hourlyforecast">
+                    <div className="Hourlyforecast">
                             <h3>00:00</h3>
                             <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
                             <h3 className="hourly">00c</h3>
@@ -196,10 +196,10 @@ const HomePage = () => {
                             <h3 className="hourly">0km/hr</h3>
                     </div>
                     </div>
-                        </div>
+                </div>
                 </div>
                     </div>
-                    </div>
+    </div>
   );
 };
  
