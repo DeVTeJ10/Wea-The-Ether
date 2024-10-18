@@ -1,9 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
-import HomePage from './Pages/homepage/HomePage';
+import HomePage from "./Pages/Homepage/HomePage"
 
 
 
-console.log("testing...")
+
+console.log("refactoring...")
 
 
 function App() {
