@@ -5,8 +5,6 @@ import HomePage from './Pages/homepage/HomePage';
 
 
 
-
-
 function App() {
   return (
     <>
