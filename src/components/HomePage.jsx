@@ -1,10 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "./homepage.css"
-import weatherlogo from "../Images/Suns.png"
-import weatherlogo2 from "../Images/humidity.png"
 import windspeed from "../Images/windspeed.png"
-import pressure from "../Images/pressure.png"
 
 
 
@@ -30,7 +27,7 @@ const HomePage = () => {
  
     
  
- 
+
     const fetchData = async () => {
         if (!weatherInput) return;  // Prevent fetching if no input
 
@@ -38,7 +35,7 @@ const HomePage = () => {
           const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${weatherInput}&appid=${apiKey}`);
             console.log('location', response);  // Add semicolon if missing
             setWeatherData(response.data);
-            setWeatherInput("")
+            // setWeatherInput("")
             console.log(response)
         } catch(error) {
             console.error(error);
@@ -53,27 +50,33 @@ const HomePage = () => {
         }
     }, [weatherInput]);
 
+
+    const iconCode = weatherData?.weather?.[0]?.icon;
+    const iconUrl = `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
+
  
  
  
   return (
     <div>
- 
-        <div className="weatherwe">
+
+
+<div className="doejohn">
+    <div className="weatherwe">
         <form onSubmit={handleSubmit} autoComplete='on'>
-            <div className="longlati">
             <input placeholder="Input city"
                 id="weather"
                 onChange={handleChange}
                 value={weatherInput}
                 className="inputcity"
                 type="text">
-                </input>
-            </div>
-            <button className="weathercall" type="submit">Enter</button>
-            </form>
-        </div>
- 
+            </input>
+        </form>
+    </div>
+    <button className="weatherBTN" type="button">Enter</button>
+    </div>
+
+
                 <div className="checktemps">
                 <div className="detailsofcity" >
                     <div className="detailscity">
@@ -89,7 +92,6 @@ const HomePage = () => {
                 <div className="detailsDay">
                 <div className="daysdetails">
                 <div>
-                <h1>00C</h1>
                     <div className="sunrise">
                         <h4>Sunrise:</h4>
                         <h4>{weatherData?.sys?.sunrise}</h4>
@@ -102,25 +104,28 @@ const HomePage = () => {
                 </div>
  
                 <div>
-                    <img src={weatherlogo} width={60.72} height={60.72} alt="Star 3" />
-                    <h3>Sunny</h3>
+
+                    <img src={iconUrl} width={100} height={100} alt="Star 3" />
+                    <h3>{weatherData?.weather?.[0]?.description}</h3>
+
                 </div>
  
                 <div>
-                    <img src={weatherlogo2} width={30.72} height={30.72} alt="Star 3" />
+                    <div>
                     <h3>{weatherData?.main?.humidity}</h3>
-                    <h4>humidity is </h4>
-                    <img src={pressure} width={30.72} height={30.72} alt="Star 3" />
+                    <h4>humidity is:</h4>
+                    </div>
+                    <div>
                     <h3>{weatherData?.main?.pressure}</h3>
-                    <h4>Pressure is </h4>
+                    <h4>Pressure is:</h4>
+                    </div>
+                    
                 </div>
                 <div>
-                    <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
                     <h3>{weatherData?.wind?.speed}</h3>
-                    <h4>windspeed is </h4>
-                    <img src={pressure} width={30.72} height={30.72} alt="Star 3" />
-                    <h3>26492</h3>
-                    <h4>UV</h4>
+                    <h4>windspeed is:</h4>
+                    <h3>{weatherData?.wind?.gust}</h3>
+                    <h4>Wind gust is:</h4>
                 </div>
                 </div>
                 </div>
