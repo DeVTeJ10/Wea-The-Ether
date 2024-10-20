@@ -1,41 +1,44 @@
 .inputcity{
-    width: 200px;
-    height: 42px;
-    border-radius: 30px;
     border: 0px;
-    font-size: 15px;
-    margin-top: 40px;
     padding-left: 20px;
-    margin-bottom: -1200px;
-    margin-left: 240px;
-
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-radius: 10px;
 }
 
 
 .weatherBTN{
     color: purple;
-    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+    border: 0px;
 }
 
 
 .doejohn{
     display: flex;
+    justify-content: center;
     align-items: center;
+    gap: 10px;
+    padding-top: 50px;
 }
 
 
 .citydetails{
     color: white;
-    border: 0.3px solid white;
-    border-color: white;
-    border-radius: 50px;
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-bottom: 20px;
-    padding-top: 40px;
-    width: 310px;
     text-align: center;
-    margin-top: 30px;
+    margin-top: -50px;
+}
+
+.ThankGod{
+    padding-left: 80px;
+    padding-right: 80px;
+    padding-top: 30px;
+    border-radius: 20px;
 }
 
 .citiesdetails{
@@ -61,20 +64,16 @@
     color: white;
 }
 
-.detailsDay{
-    border: 0.3px solid white;
-    border-radius: 20px;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 30px;
-}
 
 .checktemps{
     display: flex;
+    align-items: center;
     gap: 200px;
     justify-content: center;
     margin-top: 0px;
     padding-top: 40px;
+    border: 0.5px solid white;
+    border-radius: 20px;
 }
 
 .sunrise{

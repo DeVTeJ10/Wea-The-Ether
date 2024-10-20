@@ -76,8 +76,8 @@ const HomePage = () => {
     <button className="weatherBTN" type="button">Enter</button>
     </div>
 
-
-                <div className="checktemps">
+        <div className="ThankGod">
+        <div className="checktemps">
                 <div className="detailsofcity" >
                     <div className="detailscity">
                         <div className="citydetails">
@@ -121,7 +121,7 @@ const HomePage = () => {
                     </div>
                     
                 </div>
-                <div>
+                <div className="wind">
                     <h3>{weatherData?.wind?.speed}</h3>
                     <h4>windspeed is:</h4>
                     <h3>{weatherData?.wind?.gust}</h3>
@@ -130,9 +130,9 @@ const HomePage = () => {
                 </div>
                 </div>
                 </div>
- 
-                    
- 
+        </div>
+
+  
             <div className="hourlydayforcaster">
             <h3 className="forcaster">5 days forecast</h3>
             <h3 className="forehour">Hourly Forecast</h3>
