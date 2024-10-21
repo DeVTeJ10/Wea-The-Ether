@@ -1,4 +1,4 @@
-.inputcity{
+/* .inputcity{
     width: 200px;
     height: 42px;
     border-radius: 30px;
@@ -169,8 +169,8 @@
 .longlati{
     display: flex;
     /* flex-direction: column; */
-    gap: 20px;
-    margin-bottom: -30px ;
+    /* gap: 20px; */
+    /* margin-bottom: -30px ; */
 
     /* margin-top: -20px; */
-}
+/* } */ 

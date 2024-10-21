@@ -9,24 +9,40 @@
 
 
 .weatherBTN{
-    color: purple;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    color: white;
+    background-color: purple;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     border-radius: 10px;
     border: 0px;
 }
 
-
-.doejohn{
+.gotitman{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    padding-top: 50px;
+    /* flex-direction: column; */
 }
 
+.tetherwe{
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    align-items: center;
+}
+
+.iconic{
+    margin-top: -20px;
+    padding-left: 20px;
+}
+
+.weatherwe{
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 30px;
+
+}
 
 .citydetails{
     color: white;
