@@ -9,12 +9,13 @@ const HomePage = () => {
  
     const [weatherInput, setWeatherInput] = useState("");  // Handle the input value
     const [weatherData, setWeatherData] = useState({});  // Handle the api call value
+    const [localSunriseTime, setLocalSunriseTime] = useState()
+    const [localSunsetTime, setLocalSunsetTime] = useState()
     // const [loading, setLoading] = useState(true)  // Handle the loading gif
     const apiKey = 'b96e0a473aed03ed2ffcdd3d32e5f323'
 
  
  
-    
     const handleSubmit = (e) => {
         e.preventDefault();
         fetchData();  // Call function to send data to API
@@ -26,47 +27,54 @@ const HomePage = () => {
       };
  
     
- 
     const fetchData = async () => {
         if (!weatherInput) return;  // Prevent fetching if no input
 
         try {
           const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${weatherInput}&appid=${apiKey}`);
             console.log('location', response);  // Add semicolon if missing
-
             setWeatherData(response.data);
-            const sunrisen = response?.data?.sys?.sunrise; // Replace 'utcValue' with the actual key
-            const localTime = convertUTCToLocalTime(sunrisen);
-
-            console.log(localTime)
-            console.log(sunrisen)
+            processData()
         } catch(error) {
             console.error(error);
             // setLoading(true)
         }
       };
-
       useEffect(() => {
         if (weatherInput) {  // Only fetch data if there's input
             fetchData();  // Fetch data whenever 'Input' changes
         }
     }, [weatherInput]);
 
+
         const iconCode = weatherData?.weather?.[0]?.icon;
         const iconUrl = `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
 
 
-        function convertUTCToLocalTime(sunrisen) {
-            const date = new Date(sunrisen * 1000); // Convert seconds to milliseconds
-            return date.toLocaleString(); // Return the local time as a string
-          }
+        const processData = () => {
+            if (weatherData && weatherData?.sys?.sunrise && weatherData?.sys?.sunset)  {
+                const sunriseValue = weatherData.sys.sunrise; // Ensure value is present
+                const sunsetValue = weatherData.sys.sunset;
+                const currentSunriseTime = new Date(sunriseValue * 1000).toLocaleString(); // Convert to date
+                const currentSunsetTime = new Date(sunsetValue * 1000).toLocaleString(); // Convert to date
+                setLocalSunriseTime(currentSunriseTime); // Update the state variable
+                setLocalSunsetTime(currentSunsetTime); // Update the state variable
+                console.log(currentSunriseTime);
+                console.log(currentSunsetTime);
+            }
+        };
+        
+        // Run the function only when `weatherData` has been updated
+        useEffect(() => {
+            if (weatherData) {
+                processData(); 
+            }
+        }, [weatherData]);
+        
 
-        //   const endpoint = `https://api.openweathermap.org/data/2.5/weather?q=${weatherInput}&appid=${apiKey}`
-        //   console.log(convertUTCToLocalTime(endpoint))
- 
+    
  
   return (
-
 
     <div>
         <div className="weatherwe">
@@ -103,11 +111,11 @@ const HomePage = () => {
                 <div>
                     <div className="sunrise">
                         <h4>Sunrise:</h4>
-                        <h4 id="Sunrise">{weatherData?.sys?.sunrise}</h4>
+                        <h4 id="Sunrise">{localSunriseTime}</h4>
                     </div>
                     <div className="sunset">
                         <h4>Sunset:</h4>
-                        <h4 id="Sunset">Weather Date: </h4>
+                        <h4 id="Sunset">{localSunsetTime} </h4>
                     </div>
                     <h3>Feels like: {weatherData?.main?.temp}</h3>
                 </div>
