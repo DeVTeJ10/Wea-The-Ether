@@ -133,7 +133,9 @@ const HomePage = () => {
                 </div>
  
                 <div className="tetherwe">
-                    <img src={displayIconic} width={100} height={100} alt="Star 3" />
+                    <div style={{ width: "100px", height: "100px" }}>
+                    {displayIconic && <img src={displayIconic} width={100} height={100} alt="Star 3" />}
+                    </div>
                     <h3 className="iconic">{weatherData?.weather?.[0]?.description}</h3>
                 </div>
  
