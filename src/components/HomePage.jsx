@@ -11,6 +11,7 @@ const HomePage = () => {
     const [weatherData, setWeatherData] = useState({});  // Handle the api call value
     const [localSunriseTime, setLocalSunriseTime] = useState()
     const [localSunsetTime, setLocalSunsetTime] = useState()
+    const [displayIconic, setDisplayIcon] = useState("")
     // const [loading, setLoading] = useState(true)  // Handle the loading gif
     const apiKey = 'b96e0a473aed03ed2ffcdd3d32e5f323'
 
@@ -35,6 +36,7 @@ const HomePage = () => {
             console.log('location', response);  // Add semicolon if missing
             setWeatherData(response.data);
             processData()
+            displayImage()
         } catch(error) {
             console.error(error);
             // setLoading(true)
@@ -47,8 +49,18 @@ const HomePage = () => {
     }, [weatherInput]);
 
 
-        const iconCode = weatherData?.weather?.[0]?.icon;
-        const iconUrl = `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
+        
+
+        const displayImage = () => {
+            if (weatherData && weatherData?.weather?.[0].icon) {
+                const iconCode = weatherData?.weather[0].icon;
+                const iconUrl = `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
+                 setDisplayIcon(iconUrl)
+            }
+        }
+        useEffect(() => {
+                displayImage()
+        },[weatherData])
 
 
         const processData = () => {
@@ -121,7 +133,7 @@ const HomePage = () => {
                 </div>
  
                 <div className="tetherwe">
-                    <img src={iconUrl} width={100} height={100} alt="Star 3" />
+                    <img src={displayIconic} width={100} height={100} alt="Star 3" />
                     <h3 className="iconic">{weatherData?.weather?.[0]?.description}</h3>
                 </div>
  
