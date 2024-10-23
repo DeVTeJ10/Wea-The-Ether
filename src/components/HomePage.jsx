@@ -9,6 +9,8 @@ const HomePage = () => {
  
     const [weatherInput, setWeatherInput] = useState("");  // Handle the input value
     const [weatherData, setWeatherData] = useState({});  // Handle the api call value
+    const [weatherData1, setWeatherData1] = useState({});
+    const [weatherData2, setWeatherData2] = useState({});
     const [localSunriseTime, setLocalSunriseTime] = useState()
     const [localSunsetTime, setLocalSunsetTime] = useState()
     const [displayIconic, setDisplayIcon] = useState("")
@@ -19,54 +21,48 @@ const HomePage = () => {
  
     const handleSubmit = (e) => {
         e.preventDefault();
-        // fetchData();  // Call function to send data to API
+        fetchData();  // Call function to send data to API
         fetchData1();
         fetchData2();
       };
- 
+
  
     const handleChange = (e) => {
         setWeatherInput(e.target.value);  // Update state with input value
       };
  
 
-    const fetchData1 = async () => {
+      const fetchData1 = async () => {
         if (!weatherInput) return;
         return axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${weatherInput}&appid=${apiKey}`);
     }
-    useEffect(() => {
-        if (weatherInput) {  // Only fetch data if there's input
-            fetchData1();
-        }
-    }, [weatherInput]);
-
-
-
+    
+    
+    
     const fetchData2 = async () => {
         if (!weatherInput) return;
         return axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${weatherInput}&appid=${apiKey}`);
     }
-    useEffect(() => {
-        if (weatherInput) {  // Only fetch data if there's input
-            fetchData2();
-        }
-    }, [weatherInput]);
 
 
+    const fetchTwoApis = async () => {
 
-    Promise.all([fetchData1(), fetchData2()])
+        Promise.all([fetchData1(), fetchData2()])
         .then (([response1, response2])  => {
+            if (!weatherInput) return;
                 console.log('Data from 1st api:', response1.data);
-                setWeatherData(response1.data)
+                setWeatherData1(response1?.data)
                 console.log('Data from 2nd api:', response2.data);
+                setWeatherData2(response2?.data)
         })
             .catch(error => {
                 console.error('Error', error)
             })
+
+    }
             useEffect(() => {
                 if (weatherInput) {  // Only fetch data if there's input
-                    fetchData1();
-                    fetchData2();
+                    fetchTwoApis()
                 }
             }, [weatherInput]);
 
