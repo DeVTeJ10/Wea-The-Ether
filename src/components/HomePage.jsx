@@ -14,12 +14,14 @@ const HomePage = () => {
     const [displayIconic, setDisplayIcon] = useState("")
     // const [loading, setLoading] = useState(true)  // Handle the loading gif
     const apiKey = 'b96e0a473aed03ed2ffcdd3d32e5f323'
-
+ 
  
  
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetchData();  // Call function to send data to API
+        // fetchData();  // Call function to send data to API
+        fetchData1();
+        fetchData2();
       };
  
  
@@ -27,7 +29,50 @@ const HomePage = () => {
         setWeatherInput(e.target.value);  // Update state with input value
       };
  
-    
+
+    const fetchData1 = async () => {
+        if (!weatherInput) return;
+        return axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${weatherInput}&appid=${apiKey}`);
+    }
+    useEffect(() => {
+        if (weatherInput) {  // Only fetch data if there's input
+            fetchData1();
+        }
+    }, [weatherInput]);
+
+
+
+    const fetchData2 = async () => {
+        if (!weatherInput) return;
+        return axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${weatherInput}&appid=${apiKey}`);
+    }
+    useEffect(() => {
+        if (weatherInput) {  // Only fetch data if there's input
+            fetchData2();
+        }
+    }, [weatherInput]);
+
+
+
+    Promise.all([fetchData1(), fetchData2()])
+        .then (([response1, response2])  => {
+                console.log('Data from 1st api:', response1.data);
+                setWeatherData(response1.data)
+                console.log('Data from 2nd api:', response2.data);
+        })
+            .catch(error => {
+                console.error('Error', error)
+            })
+            useEffect(() => {
+                if (weatherInput) {  // Only fetch data if there's input
+                    fetchData1();
+                    fetchData2();
+                }
+            }, [weatherInput]);
+
+
+
+
     const fetchData = async () => {
         if (!weatherInput) return;  // Prevent fetching if no input
 
@@ -50,7 +95,6 @@ const HomePage = () => {
 
 
         
-
         const displayImage = () => {
             if (weatherData && weatherData?.weather?.[0].icon) {
                 const iconCode = weatherData?.weather[0].icon;
@@ -75,7 +119,6 @@ const HomePage = () => {
                 console.log(currentSunsetTime);
             }
         };
-        
         // Run the function only when `weatherData` has been updated
         useEffect(() => {
             if (weatherData) {
