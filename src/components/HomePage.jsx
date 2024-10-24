@@ -16,6 +16,10 @@ const HomePage = () => {
     const [displayIconic, setDisplayIcon] = useState("")
     // const [loading, setLoading] = useState(true)  // Handle the loading gif
     const apiKey = 'b96e0a473aed03ed2ffcdd3d32e5f323'
+    // const cityName = weatherData?.name
+
+    // console.log(cityName)
+    
  
  
  
@@ -34,10 +38,10 @@ const HomePage = () => {
 
       const fetchData1 = async () => {
         if (!weatherInput) return;
-        return axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${weatherInput}&appid=${apiKey}`);
+        return axios.get(`http://api.openweathermap.org/data/2.5/forecast/daily?q=${weatherData.name}&cnt=${16}&appid=${apiKey}`);
     }
     
-    
+    // 
     
     const fetchData2 = async () => {
         if (!weatherInput) return;
@@ -46,13 +50,13 @@ const HomePage = () => {
 
 
     const fetchTwoApis = async () => {
-
         Promise.all([fetchData1(), fetchData2()])
         .then (([response1, response2])  => {
             if (!weatherInput) return;
-                console.log('Data from 1st api:', response1.data);
-                setWeatherData1(response1?.data)
-                console.log('Data from 2nd api:', response2.data);
+                // const cityName = response1.data.name
+                console.log('Data from 1st api:', response1);
+                setWeatherData1(response1?.data?.name)
+                console.log('Data from 2nd api:', response2);
                 setWeatherData2(response2?.data)
         })
             .catch(error => {
@@ -103,6 +107,7 @@ const HomePage = () => {
         },[weatherData])
 
 
+
         const processData = () => {
             if (weatherData && weatherData?.sys?.sunrise && weatherData?.sys?.sunset)  {
                 const sunriseValue = weatherData.sys.sunrise; // Ensure value is present
@@ -124,7 +129,6 @@ const HomePage = () => {
         
 
     
- 
   return (
 
     <div>
@@ -149,7 +153,7 @@ const HomePage = () => {
                 <div className="detailsofcity" >
                     <div className="detailscity">
                         <div className="citydetails">
-                            <h2>The Latitude for {weatherData?.name} is: {weatherData?.coord?.lat} with longitude: {weatherData?.coord?.lon}</h2>
+                            <h2>The Latitude for {weatherData?.name} in {weatherData?.sys?.country} is: {weatherData?.coord?.lat} with longitude: {weatherData?.coord?.lon}</h2>
                             <h1>{weatherData?.weather?.[0]?.description}</h1>
                             <h4></h4>
                         </div>
