@@ -8,21 +8,17 @@ import windspeed from "../Images/windspeed.png"
 const HomePage = () => {
  
     const [weatherInput, setWeatherInput] = useState("");  // Handle the input value
-    const [weatherData, setWeatherData] = useState({});  // Handle the api call value
+    const [weatherData, setWeatherData] = useState();  // Handle the api call value
     const [weatherData1, setWeatherData1] = useState({});
     const [weatherData2, setWeatherData2] = useState({});
     const [localSunriseTime, setLocalSunriseTime] = useState();
     const [localSunsetTime, setLocalSunsetTime] = useState();
     const [displayIconic, setDisplayIcon] = useState("");
-    // const [loading, setLoading] = useState(true)  // Handle the loading gif
     const apiKey = 'b96e0a473aed03ed2ffcdd3d32e5f323'
-    // const cityName = weatherData.name
 
 
     
- 
- 
- 
+
     const handleSubmit = (e) => {
         e.preventDefault();
         fetchData();  // Call function to send data to API
@@ -36,16 +32,18 @@ const HomePage = () => {
  
 
       const fetchData1 = async () => {
-        if (!weatherInput) return;
+        if (!weatherInput && !weatherData) return;
         if (weatherData && weatherData?.coord?.lat && weatherData?.coord?.lon) {
             const locationLat = weatherData.coord.lat
             const locationLon = weatherData.coord.lon
             const apiKey = "b96e0a473aed03ed2ffcdd3d32e5f323"
-            return axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${locationLat}&lon=${locationLon}&appid=${apiKey}`); //location name, limit number and api key are the parameters needed for this api url
+            const datacorrectly = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${locationLat}&lon=${locationLon}&appid=${apiKey}`); //location name, limit number and api key are the parameters needed for this api url
+
+            return datacorrectly
         }
     }
 
-    // 
+
     const fetchData2 = async () => {
         if (!weatherInput) return;
         return axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${weatherInput}&appid=${apiKey}`);
@@ -67,10 +65,10 @@ const HomePage = () => {
             })
     }
             useEffect(() => {
-                if (weatherInput) {  // Only fetch data if there's input
+                if (weatherInput && weatherData) {  // Only fetch data if there's input
                     fetchTwoApis()
                 }
-            }, [weatherInput]);
+            }, [weatherInput, weatherData]);
 
 
 
@@ -145,7 +143,7 @@ const HomePage = () => {
                     type="text">
                 </input>
             </form>
-            <button className="weatherBTN" type="submit" onClick={fetchTwoApis}>Enter</button>
+            <button className="weatherBTN" type="submit">Enter</button>
             </div>
         </div>
 
