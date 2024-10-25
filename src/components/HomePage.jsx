@@ -11,14 +11,14 @@ const HomePage = () => {
     const [weatherData, setWeatherData] = useState({});  // Handle the api call value
     const [weatherData1, setWeatherData1] = useState({});
     const [weatherData2, setWeatherData2] = useState({});
-    const [localSunriseTime, setLocalSunriseTime] = useState()
-    const [localSunsetTime, setLocalSunsetTime] = useState()
-    const [displayIconic, setDisplayIcon] = useState("")
+    const [localSunriseTime, setLocalSunriseTime] = useState();
+    const [localSunsetTime, setLocalSunsetTime] = useState();
+    const [displayIconic, setDisplayIcon] = useState("");
     // const [loading, setLoading] = useState(true)  // Handle the loading gif
     const apiKey = 'b96e0a473aed03ed2ffcdd3d32e5f323'
-    // const cityName = weatherData?.name
+    // const cityName = weatherData.name
 
-    // console.log(cityName)
+
     
  
  
@@ -30,7 +30,6 @@ const HomePage = () => {
         fetchData2();
       };
 
- 
     const handleChange = (e) => {
         setWeatherInput(e.target.value);  // Update state with input value
       };
@@ -38,11 +37,15 @@ const HomePage = () => {
 
       const fetchData1 = async () => {
         if (!weatherInput) return;
-        return axios.get(`http://api.openweathermap.org/data/2.5/forecast/daily?q=${weatherData.name}&cnt=${16}&appid=${apiKey}`);
+        if (weatherData && weatherData?.coord?.lat && weatherData?.coord?.lon) {
+            const locationLat = weatherData.coord.lat
+            const locationLon = weatherData.coord.lon
+            const apiKey = "b96e0a473aed03ed2ffcdd3d32e5f323"
+            return axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${locationLat}&lon=${locationLon}&appid=${apiKey}`); //location name, limit number and api key are the parameters needed for this api url
+        }
     }
-    
+
     // 
-    
     const fetchData2 = async () => {
         if (!weatherInput) return;
         return axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${weatherInput}&appid=${apiKey}`);
@@ -55,14 +58,13 @@ const HomePage = () => {
             if (!weatherInput) return;
                 // const cityName = response1.data.name
                 console.log('Data from 1st api:', response1);
-                setWeatherData1(response1?.data?.name)
+                setWeatherData1(response1?.data)
                 console.log('Data from 2nd api:', response2);
                 setWeatherData2(response2?.data)
         })
             .catch(error => {
                 console.error('Error', error)
             })
-
     }
             useEffect(() => {
                 if (weatherInput) {  // Only fetch data if there's input
@@ -143,10 +145,9 @@ const HomePage = () => {
                     type="text">
                 </input>
             </form>
-            <button className="weatherBTN" type="submit">Enter</button>
+            <button className="weatherBTN" type="submit" onClick={fetchTwoApis}>Enter</button>
             </div>
         </div>
-
 
         <div className="ThankGod">
         <div className="checktemps">
@@ -159,7 +160,6 @@ const HomePage = () => {
                         </div>
                     </div>
                 </div>
- 
  
                 <div className="detailsDay">
                 <div className="daysdetails">
