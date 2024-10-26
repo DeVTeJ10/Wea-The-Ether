@@ -8,9 +8,9 @@ import windspeed from "../Images/windspeed.png"
 const HomePage = () => {
  
     const [weatherInput, setWeatherInput] = useState("");  // Handle the input value
-    const [weatherData, setWeatherData] = useState();  // Handle the api call value
-    const [weatherData1, setWeatherData1] = useState({});
-    const [weatherData2, setWeatherData2] = useState({});
+    // const [weatherData, setWeatherData] = useState();  // Handle the api call value
+    const [weatherData1, setWeatherData1] = useState();
+    const [weatherData2, setWeatherData2] = useState();
     const [localSunriseTime, setLocalSunriseTime] = useState();
     const [localSunsetTime, setLocalSunsetTime] = useState();
     const [displayIconic, setDisplayIcon] = useState("");
@@ -21,9 +21,9 @@ const HomePage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetchData();  // Call function to send data to API
-        fetchData1();
-        fetchData2();
+        // fetchData();  // Call function to send data to API
+        fetchTwoApis();
+        // fetchData2();
       };
 
     const handleChange = (e) => {
@@ -32,43 +32,43 @@ const HomePage = () => {
  
 
       const fetchData1 = async () => {
-        if (!weatherInput && !weatherData) return;
-        if (weatherData && weatherData?.coord?.lat && weatherData?.coord?.lon) {
-            const locationLat = weatherData.coord.lat
-            const locationLon = weatherData.coord.lon
+        if (!weatherInput && !weatherData2) return;
+        if (weatherData2 && weatherData2?.coord?.lat && weatherData2?.coord?.lon) {
+            const locationLat = weatherData2.coord.lat
+            const locationLon = weatherData2.coord.lon
             const apiKey = "b96e0a473aed03ed2ffcdd3d32e5f323"
-            const datacorrectly = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${locationLat}&lon=${locationLon}&appid=${apiKey}`); //location name, limit number and api key are the parameters needed for this api url
-
+            const datacorrectly = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${locationLat}&lon=${locationLon}&appid=${apiKey}`); 
             return datacorrectly
         }
     }
 
 
-    const fetchData2 = async () => {
-        if (!weatherInput) return;
-        return axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${weatherInput}&appid=${apiKey}`);
-    }
+        const fetchData2 = async () => {
+            if (!weatherInput) return;
+            return axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${weatherInput}&appid=${apiKey}`);
+        }
 
 
     const fetchTwoApis = async () => {
         Promise.all([fetchData1(), fetchData2()])
         .then (([response1, response2])  => {
             if (!weatherInput) return;
-                // const cityName = response1.data.name
                 console.log('Data from 1st api:', response1);
                 setWeatherData1(response1?.data)
                 console.log('Data from 2nd api:', response2);
                 setWeatherData2(response2?.data)
+                processData()
+                displayImage()
         })
             .catch(error => {
                 console.error('Error', error)
             })
     }
             useEffect(() => {
-                if (weatherInput && weatherData) {  // Only fetch data if there's input
+                if (weatherInput && weatherData2) {  // Only fetch data if there's input
                     fetchTwoApis()
                 }
-            }, [weatherInput, weatherData]);
+            }, [weatherInput && weatherData2]);
 
 
 
@@ -79,7 +79,7 @@ const HomePage = () => {
         try {
           const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${weatherInput}&appid=${apiKey}`);
             console.log('location', response);  // Add semicolon if missing
-            setWeatherData(response.data);
+            // setWeatherData(response.data);
             processData()
             displayImage()
         } catch(error) {
@@ -96,22 +96,22 @@ const HomePage = () => {
 
         
         const displayImage = () => {
-            if (weatherData && weatherData?.weather?.[0].icon) {
-                const iconCode = weatherData?.weather[0].icon;
+            if (weatherData2 && weatherData2?.weather?.[0].icon) {
+                const iconCode = weatherData2?.weather[0].icon;
                 const iconUrl = `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
                  setDisplayIcon(iconUrl)
             }
         }
         useEffect(() => {
                 displayImage()
-        },[weatherData])
+        },[weatherData2])
 
 
 
         const processData = () => {
-            if (weatherData && weatherData?.sys?.sunrise && weatherData?.sys?.sunset)  {
-                const sunriseValue = weatherData.sys.sunrise; // Ensure value is present
-                const sunsetValue = weatherData.sys.sunset;
+            if (weatherData2 && weatherData2?.sys?.sunrise && weatherData2?.sys?.sunset)  {
+                const sunriseValue = weatherData2.sys.sunrise; // Ensure value is present
+                const sunsetValue = weatherData2.sys.sunset;
                 const currentSunriseTime = new Date(sunriseValue * 1000).toLocaleString(); // Convert to date
                 const currentSunsetTime = new Date(sunsetValue * 1000).toLocaleString(); // Convert to date
                 setLocalSunriseTime(currentSunriseTime); // Update the state variable
@@ -122,10 +122,10 @@ const HomePage = () => {
         };
         // Run the function only when `weatherData` has been updated
         useEffect(() => {
-            if (weatherData) {
+            if (weatherData2) {
                 processData(); 
             }
-        }, [weatherData]);
+        }, [weatherData2]);
         
 
     
@@ -152,8 +152,8 @@ const HomePage = () => {
                 <div className="detailsofcity" >
                     <div className="detailscity">
                         <div className="citydetails">
-                            <h2>The Latitude for {weatherData?.name} in {weatherData?.sys?.country} is: {weatherData?.coord?.lat} with longitude: {weatherData?.coord?.lon}</h2>
-                            <h1>{weatherData?.weather?.[0]?.description}</h1>
+                            <h2>The Latitude for {weatherData2?.name} in {weatherData2?.sys?.country} is: {weatherData2?.coord?.lat} with longitude: {weatherData2?.coord?.lon}</h2>
+                            <h1>{weatherData2?.weather?.[0]?.description}</h1>
                             <h4></h4>
                         </div>
                     </div>
@@ -170,32 +170,32 @@ const HomePage = () => {
                         <h4>Sunset:</h4>
                         <h4 id="Sunset">{localSunsetTime} </h4>
                     </div>
-                    <h3>Feels like: {weatherData?.main?.temp}</h3>
+                    <h3>Feels like: {weatherData2?.main?.temp}</h3>
                 </div>
  
                 <div className="tetherwe">
                     <div style={{ width: "100px", height: "100px" }}>
                     {displayIconic && <img src={displayIconic} width={100} height={100} alt="Star 3" />}
                     </div>
-                    <h3 className="iconic">{weatherData?.weather?.[0]?.description}</h3>
+                    <h3 className="iconic">{weatherData2?.weather?.[0]?.description}</h3>
                 </div>
  
                 <div>
                     <div>
                     <h4>humidity is:</h4>
-                    <h3>{weatherData?.main?.humidity}</h3>
+                    <h3>{weatherData2?.main?.humidity}</h3>
                     </div>
                     <div>
                     <h4>Pressure is:</h4>
-                    <h3>{weatherData?.main?.pressure}</h3>
+                    <h3>{weatherData2?.main?.pressure}</h3>
                     </div>
                     
                 </div>
                 <div className="wind">
                     <h4>windspeed is:</h4>
-                    <h3>{weatherData?.wind?.speed}</h3>
+                    <h3>{weatherData2?.wind?.speed}</h3>
                     <h4>Wind gust is:</h4>
-                    <h3>{weatherData?.wind?.gust}</h3>
+                    <h3>{weatherData2?.wind?.gust}</h3>
                 </div>
                 </div>
                 </div>
