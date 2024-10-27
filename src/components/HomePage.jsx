@@ -21,33 +21,40 @@ const HomePage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // fetchData();  // Call function to send data to API
         fetchTwoApis();
-        // fetchData2();
       };
+      
 
     const handleChange = (e) => {
         setWeatherInput(e.target.value);  // Update state with input value
       };
  
 
-      const fetchData1 = async () => {
-        if (!weatherInput && !weatherData2) return;
-        if (weatherData2 && weatherData2?.coord?.lat && weatherData2?.coord?.lon) {
-            const locationLat = weatherData2.coord.lat
-            const locationLon = weatherData2.coord.lon
-            const apiKey = "b96e0a473aed03ed2ffcdd3d32e5f323"
-            const datacorrectly = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${locationLat}&lon=${locationLon}&appid=${apiKey}`); 
-            return datacorrectly
-        }
-    }
-
-
-        const fetchData2 = async () => {
-            if (!weatherInput) return;
-            return axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${weatherInput}&appid=${apiKey}`);
-        }
-
+      const fetchData2 = async () => {
+        console.log("fetchData2 is being called");
+        if (!weatherInput) return;
+    
+        const apiKey = "b96e0a473aed03ed2ffcdd3d32e5f323";
+        const apidata1 = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${weatherInput}&appid=${apiKey}`);
+        return apidata1;
+    };
+    
+    const fetchData1 = async () => {
+        console.log("fetchData1 is being called");
+    
+        // Wait for fetchData2 to complete and get its data
+        const weatherData2 = await fetchData2();
+    
+        if (!weatherData2 || !weatherData2?.data?.coord?.lat || !weatherData2?.data?.coord?.lon) return;
+    
+        const locationLat = weatherData2.data.coord.lat;
+        const locationLon = weatherData2.data.coord.lon;
+        const apiKey = "b96e0a473aed03ed2ffcdd3d32e5f323";
+        
+        const datacorrectly = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${locationLat}&lon=${locationLon}&appid=${apiKey}`);
+        return datacorrectly;
+    };
+    
 
     const fetchTwoApis = async () => {
         Promise.all([fetchData1(), fetchData2()])
@@ -65,33 +72,11 @@ const HomePage = () => {
             })
     }
             useEffect(() => {
-                if (weatherInput && weatherData2) {  // Only fetch data if there's input
+                if (weatherInput && !weatherData2 ) {  // Only fetch data if there's input
                     fetchTwoApis()
                 }
             }, [weatherInput && weatherData2]);
 
-
-
-
-    const fetchData = async () => {
-        if (!weatherInput) return;  // Prevent fetching if no input
-
-        try {
-          const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${weatherInput}&appid=${apiKey}`);
-            console.log('location', response);  // Add semicolon if missing
-            // setWeatherData(response.data);
-            processData()
-            displayImage()
-        } catch(error) {
-            console.error(error);
-            // setLoading(true)
-        }
-      };
-      useEffect(() => {
-        if (weatherInput) {  // Only fetch data if there's input
-            fetchData();  // Fetch data whenever 'Input' changes
-        }
-    }, [weatherInput]);
 
 
         
