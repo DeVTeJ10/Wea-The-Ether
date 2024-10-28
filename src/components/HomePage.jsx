@@ -17,6 +17,7 @@ const HomePage = () => {
     const [forecastHour2, setForecastHour2] = useState("")
     const [forecastHour3, setForecastHour3] = useState("")
     const [forecastHour4, setForecastHour4] = useState("")
+    const [forecastHour5, setForecastHour5] = useState("")
     const apiKey = 'b96e0a473aed03ed2ffcdd3d32e5f323' // Api key needed for both apis to work
 
 
@@ -68,6 +69,7 @@ const HomePage = () => {
                 console.log('Data from 2nd api:', response2);
                 setWeatherData2(response2?.data)
                 processData()
+                processHourlyForecast()
                 displayImage()
         })
             .catch(error => {
@@ -130,31 +132,37 @@ const HomePage = () => {
 
 
 
-        const processDatas = () => {
+        const processHourlyForecast = () => {
             if (weatherData1 && weatherData1?.list && weatherData1?.list)  {
                 const hour1 = weatherData1.list[0].dt_txt; // Ensure value is present
                 const hour2 = weatherData1.list[1].dt_txt;
                 const hour3 = weatherData1.list[2].dt_txt;
                 const hour4 = weatherData1.list[3].dt_txt;
+                const hour5 = weatherData1.list[4].dt_txt;
+
                 const forecastHour1Data = new Date(hour1)
                 const forecastHour2Data = new Date(hour2)
                 const forecastHour3Data = new Date(hour3)
                 const forecastHour4Data = new Date(hour4)
+                const forecastHour5Data = new Date(hour5)
+
                 const forecastHourly1 = forecastHour1Data.getHours()
                 const forecastHourly2 = forecastHour2Data.getHours()
                 const forecastHourly3 = forecastHour3Data.getHours()
                 const forecastHourly4 = forecastHour4Data.getHours()
-                // const forecastValue1 = weatherData1.list[0];
+                const forecastHourly5 = forecastHour5Data.getHours()
+
                 setForecastHour1(forecastHourly1)
                 setForecastHour2(forecastHourly2)
                 setForecastHour3(forecastHourly3)
                 setForecastHour4(forecastHourly4)
+                setForecastHour5(forecastHourly5)
             }
         };
         // Run the function only when `weatherData` has been updated
         useEffect(() => {
             if (weatherData1) {
-                processDatas(); 
+                processHourlyForecast(); 
             }
         }, [weatherData1]);
         
@@ -296,7 +304,7 @@ const HomePage = () => {
                             <h3 className="hourly">0km/hr</h3>
                         </div>
                     <div className="Hourlyforecast">
-                            <h3>00:00</h3>
+                            <h3>{forecastHour5}:00</h3>
                             <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
                             <h3 className="hourly">00c</h3>
                             <h5 className="hourlydesc">Weather description</h5>
