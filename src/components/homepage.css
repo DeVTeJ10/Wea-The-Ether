@@ -30,6 +30,10 @@
     gap: 0px;
     align-items: center;
 }
+/* 
+.hourlydesc{
+    display: flex;
+} */
 
 .iconic{
     margin-top: -20px;

@@ -8,13 +8,16 @@ import windspeed from "../Images/windspeed.png"
 const HomePage = () => {
  
     const [weatherInput, setWeatherInput] = useState("");  // Handle the input value
-    // const [weatherData, setWeatherData] = useState();  // Handle the api call value
-    const [weatherData1, setWeatherData1] = useState();
-    const [weatherData2, setWeatherData2] = useState();
-    const [localSunriseTime, setLocalSunriseTime] = useState();
-    const [localSunsetTime, setLocalSunsetTime] = useState();
-    const [displayIconic, setDisplayIcon] = useState("");
-    const apiKey = 'b96e0a473aed03ed2ffcdd3d32e5f323'
+    const [weatherData1, setWeatherData1] = useState(); // Handle the second api call
+    const [weatherData2, setWeatherData2] = useState(); // Handle the first api call
+    const [localSunriseTime, setLocalSunriseTime] = useState(); // Handle local sunrise data
+    const [localSunsetTime, setLocalSunsetTime] = useState(); // Handle local sunset data
+    const [displayIconic, setDisplayIcon] = useState(""); // Handle displaying the right image for the right weather
+    const [forecastHour1, setForecastHour1] = useState("") // Handle forecast of first hour available.
+    const [forecastHour2, setForecastHour2] = useState("")
+    const [forecastHour3, setForecastHour3] = useState("")
+    const [forecastHour4, setForecastHour4] = useState("")
+    const apiKey = 'b96e0a473aed03ed2ffcdd3d32e5f323' // Api key needed for both apis to work
 
 
     
@@ -23,14 +26,14 @@ const HomePage = () => {
         e.preventDefault();
         fetchTwoApis();
       };
-      
+
 
     const handleChange = (e) => {
         setWeatherInput(e.target.value);  // Update state with input value
       };
  
 
-      const fetchData2 = async () => {
+    const fetchData2 = async () => {
         console.log("fetchData2 is being called");
         if (!weatherInput) return;
     
@@ -93,6 +96,19 @@ const HomePage = () => {
 
 
 
+        // const displayForecastImage = () => {
+        //     if (weatherData2 && weatherData2?.weather?.[0].icon) {
+        //         const iconCode = weatherData2?.weather[0].icon;
+        //         const iconUrl = `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
+        //          setForecastImage(iconUrl)
+        //     }
+        // }
+        // useEffect(() => {
+        //     displayForecastImage()
+        // },[weatherData2])
+
+
+
         const processData = () => {
             if (weatherData2 && weatherData2?.sys?.sunrise && weatherData2?.sys?.sunset)  {
                 const sunriseValue = weatherData2.sys.sunrise; // Ensure value is present
@@ -111,6 +127,36 @@ const HomePage = () => {
                 processData(); 
             }
         }, [weatherData2]);
+
+
+
+        const processDatas = () => {
+            if (weatherData1 && weatherData1?.list && weatherData1?.list)  {
+                const hour1 = weatherData1.list[0].dt_txt; // Ensure value is present
+                const hour2 = weatherData1.list[1].dt_txt;
+                const hour3 = weatherData1.list[2].dt_txt;
+                const hour4 = weatherData1.list[3].dt_txt;
+                const forecastHour1Data = new Date(hour1)
+                const forecastHour2Data = new Date(hour2)
+                const forecastHour3Data = new Date(hour3)
+                const forecastHour4Data = new Date(hour4)
+                const forecastHourly1 = forecastHour1Data.getHours()
+                const forecastHourly2 = forecastHour2Data.getHours()
+                const forecastHourly3 = forecastHour3Data.getHours()
+                const forecastHourly4 = forecastHour4Data.getHours()
+                // const forecastValue1 = weatherData1.list[0];
+                setForecastHour1(forecastHourly1)
+                setForecastHour2(forecastHourly2)
+                setForecastHour3(forecastHourly3)
+                setForecastHour4(forecastHourly4)
+            }
+        };
+        // Run the function only when `weatherData` has been updated
+        useEffect(() => {
+            if (weatherData1) {
+                processDatas(); 
+            }
+        }, [weatherData1]);
         
 
     
@@ -190,7 +236,7 @@ const HomePage = () => {
   
             <div className="hourlydayforcaster">
             <h3 className="forcaster">5 days forecast</h3>
-            <h3 className="forehour">Hourly Forecast</h3>
+            <h3 className="forehour">Todays Hourly Forecast</h3>
             </div>
         
                 <div className="finaltemp">
@@ -222,38 +268,38 @@ const HomePage = () => {
                 <div className="hourcasterfor">
                     <div className="forecasthour">
                         <div className="Hourlyforecast">
-                            <h3>00:00</h3>
+                            <h3>{forecastHour1}:00</h3>
                             <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
                             <h3 className="hourly">00c</h3>
-                            <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
+                            <h5 className="hourlydesc">Weather description</h5>
                             <h3 className="hourly">0km/hr</h3>
                         </div>
                         <div className="Hourlyforecast">
-                            <h3>00:00</h3>
+                            <h3>{forecastHour2}:00</h3>
                             <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
                             <h3 className="hourly">00c</h3>
-                            <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
+                            <h5 className="hourlydesc">Weather description</h5>
                             <h3 className="hourly">0km/hr</h3>
                         </div>
                         <div className="Hourlyforecast">
-                            <h3>00:00</h3>
+                            <h3>{forecastHour3}:00</h3>
                             <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
                             <h3 className="hourly">00c</h3>
-                            <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
+                            <h5 className="hourlydesc">Weather description</h5>
                             <h3 className="hourly">0km/hr</h3>
                         </div>
                         <div className="Hourlyforecast">
-                            <h3>00:00</h3>
+                            <h3>{forecastHour4}:00</h3>
                             <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
                             <h3 className="hourly">00c</h3>
-                            <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
+                            <h5 className="hourlydesc">Weather description</h5>
                             <h3 className="hourly">0km/hr</h3>
                         </div>
                     <div className="Hourlyforecast">
                             <h3>00:00</h3>
                             <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
                             <h3 className="hourly">00c</h3>
-                            <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
+                            <h5 className="hourlydesc">Weather description</h5>
                             <h3 className="hourly">0km/hr</h3>
                     </div>
                     </div>
