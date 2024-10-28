@@ -109,20 +109,26 @@
 .weekdaystempo{
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
 }
 
 .degrees{
     color: white;
 }
 
+.foresighter{
+    /* padding-left: 80px; */
+    padding-right: 80px;
+}
+
 .weektemperature{
+    align-items: center;
     border: 0.5px solid white;
     border-radius: 20px;
-    padding-left: 60px;
-    padding-right: 60px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    /* padding-top: 10px; */
+    /* padding-bottom: 10px; */
 }
 
 .hourly{
@@ -172,7 +178,8 @@
 .hourlydayforcaster{
     display: flex;
     align-items: center;
-    gap: 530px;
+    justify-content: space-around;
+    /* gap: 430px; */
     margin-top: 20px;
     margin-bottom: 10px;
 }
