@@ -43,16 +43,8 @@ const HomePage = () => {
     const handleChange = (e) => {
         setWeatherInput(e.target.value);  // Update state with input value
       };
- 
 
-    const fetchData2 = async () => {
-        console.log("fetchData2 is being called");
-        if (!weatherInput) return;
-    
-        const apiKey = "b96e0a473aed03ed2ffcdd3d32e5f323";
-        const apidata1 = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${weatherInput}&appid=${apiKey}`);
-        return apidata1;
-    };
+
     
     const fetchData1 = async () => {
         console.log("fetchData1 is being called");
@@ -69,6 +61,17 @@ const HomePage = () => {
         const datacorrectly = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${locationLat}&lon=${locationLon}&appid=${apiKey}`);
         return datacorrectly;
     };
+
+
+    const fetchData2 = async () => {
+        console.log("fetchData2 is being called");
+        if (!weatherInput) return;
+    
+        const apiKey = "b96e0a473aed03ed2ffcdd3d32e5f323";
+        const apidata1 = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${weatherInput}&appid=${apiKey}`);
+        return apidata1;
+    };
+
     
 
     const fetchTwoApis = async () => {
@@ -79,10 +82,11 @@ const HomePage = () => {
                 setWeatherData1(response1?.data)
                 console.log('Data from 2nd api:', response2);
                 setWeatherData2(response2?.data)
-                processData()
+                processSunData()
                 processHourlyForecast()
                 displayImage()
                 displayForecastImage()
+                extractDataForDateRange()
         })
             .catch(error => {
                 console.error('Error', error)
@@ -96,7 +100,7 @@ const HomePage = () => {
 
 
 
-        
+            
         const displayImage = () => {
             if (weatherData2 && weatherData2?.weather?.[0].icon) {
                 const iconCode = weatherData2?.weather[0].icon;
@@ -137,7 +141,7 @@ const HomePage = () => {
 
 
 
-        const processData = () => {
+        const processSunData = () => {
             if (weatherData2 && weatherData2?.sys?.sunrise && weatherData2?.sys?.sunset)  {
                 const sunriseValue = weatherData2.sys.sunrise; // Ensure value is present
                 const sunsetValue = weatherData2.sys.sunset;
@@ -145,20 +149,16 @@ const HomePage = () => {
                 const currentSunriseTimes = new Date(sunriseValue * 1000).toLocaleString(); // Convert to date
                 const currentSunsetTimes = new Date(sunsetValue * 1000).toLocaleString(); // Convert to date
 
-                // const currentSunriseTime = currentSunriseTimes.getHours()
-                // const currentSunsetTime = currentSunsetTimes.getHours()
 
                 setLocalSunriseTime(currentSunriseTimes); // Update the state variable
                 setLocalSunsetTime(currentSunsetTimes); // Update the state variable
 
-                console.log(currentSunriseTimes);
-                console.log(currentSunsetTimes);
             }
         };
         // Run the function only when `weatherData` has been updated
         useEffect(() => {
             if (weatherData2) {
-                processData(); 
+                processSunData(); 
             }
         }, [weatherData2]);
 
@@ -201,27 +201,28 @@ const HomePage = () => {
 
 
 
-        const extractDataForDateRange = (data, startDate, endDate) => {
-        
+        const extractDataForDateRange = (weatherData1) => {
+            // Calculate the dynamic start and end dates
+            const startDate = new Date().toISOString().split("T")[0];
+            const endDate = new Date(new Date().setDate(new Date().getDate() + 3))
+                .toISOString()
+                .split("T")[0];
+            
             // Filter for items within the date range
-            return data?.list?.filter(list => {
-                const itemDate = new Date(list.dt_txt).toISOString().split("T")[0];
+            return weatherData1?.list?.filter(list => {
+                const itemDate = new Date(list?.dt_txt).toISOString().split("T")[0];
+                console.log(itemDate)
                 return itemDate >= startDate && itemDate <= endDate;
             });
-        };
-        
-        // Example usage: define the date range
-        const startDate = "2024-10-30";
-        const endDate = "2024-10-31";
-        const dataForDateRange = extractDataForDateRange(weatherData1, startDate, endDate);
-        
 
+        };        
+        
 
         useEffect(() => {
-            if (!weatherData1) {
+            if (!weatherData1 && !weatherInput) {
                 return
             }else{
-            console.log(dataForDateRange);
+                extractDataForDateRange()
             }
         }, [weatherData1]);
 
