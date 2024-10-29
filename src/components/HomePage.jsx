@@ -199,40 +199,33 @@ const HomePage = () => {
         }, [weatherData1]);
 
 
-        const extractDataForDate = (data, targetDate) => {
-            // Check if data is defined and is an array
-            if (!weatherData1) return
-            if (!Array.isArray(data?.list)) {
-                console.error("Data is undefined or not an array.");
-                return []; // Return an empty array if data is invalid
-            }
+
+
+        const extractDataForDateRange = (data, startDate, endDate) => {
         
-            return data?.list.filter(list => {
+            // Filter for items within the date range
+            return data?.list?.filter(list => {
                 const itemDate = new Date(list.dt_txt).toISOString().split("T")[0];
-                return itemDate === targetDate;
+                return itemDate >= startDate && itemDate <= endDate;
             });
         };
         
-        // Example usage
-        const targetDate = "2024-10-29";
-        const dataForTargetDate = extractDataForDate(weatherData1, targetDate);
-
+        // Example usage: define the date range
+        const startDate = "2024-10-30";
+        const endDate = "2024-10-31";
+        const dataForDateRange = extractDataForDateRange(weatherData1, startDate, endDate);
         
+
 
         useEffect(() => {
             if (!weatherData1) {
                 return
             }else{
-            console.log(dataForTargetDate);
-
+            console.log(dataForDateRange);
             }
         }, [weatherData1]);
 
-    
-        
-        
-        
-        
+
 
     
   return (
