@@ -127,8 +127,8 @@
     border-radius: 20px;
     padding-left: 30px;
     padding-right: 30px;
-    /* padding-top: 10px; */
-    /* padding-bottom: 10px; */
+    padding-top: 10px;
+    /* padding-bottom: 10px; *//
 }
 
 .hourly{
@@ -178,10 +178,12 @@
 .hourlydayforcaster{
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    /* gap: 430px; */
+    justify-content: center;
+    /* gap: 630px; */
     margin-top: 20px;
     margin-bottom: 10px;
+    padding-left: 80px;
+    padding-right: 80px;
 }
 
 .detailsofcity{

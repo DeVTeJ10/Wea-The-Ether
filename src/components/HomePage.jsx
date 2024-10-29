@@ -142,14 +142,17 @@ const HomePage = () => {
                 const sunriseValue = weatherData2.sys.sunrise; // Ensure value is present
                 const sunsetValue = weatherData2.sys.sunset;
 
-                const currentSunriseTime = new Date(sunriseValue * 1000).toLocaleString(); // Convert to date
-                const currentSunsetTime = new Date(sunsetValue * 1000).toLocaleString(); // Convert to date
+                const currentSunriseTimes = new Date(sunriseValue * 1000).toLocaleString(); // Convert to date
+                const currentSunsetTimes = new Date(sunsetValue * 1000).toLocaleString(); // Convert to date
 
-                setLocalSunriseTime(currentSunriseTime); // Update the state variable
-                setLocalSunsetTime(currentSunsetTime); // Update the state variable
+                // const currentSunriseTime = currentSunriseTimes.getHours()
+                // const currentSunsetTime = currentSunsetTimes.getHours()
 
-                console.log(currentSunriseTime);
-                console.log(currentSunsetTime);
+                setLocalSunriseTime(currentSunriseTimes); // Update the state variable
+                setLocalSunsetTime(currentSunsetTimes); // Update the state variable
+
+                console.log(currentSunriseTimes);
+                console.log(currentSunsetTimes);
             }
         };
         // Run the function only when `weatherData` has been updated
@@ -194,6 +197,41 @@ const HomePage = () => {
                 processHourlyForecast(); 
             }
         }, [weatherData1]);
+
+
+        const extractDataForDate = (data, targetDate) => {
+            // Check if data is defined and is an array
+            if (!weatherData1) return
+            if (!Array.isArray(data?.list)) {
+                console.error("Data is undefined or not an array.");
+                return []; // Return an empty array if data is invalid
+            }
+        
+            return data?.list.filter(list => {
+                const itemDate = new Date(list.dt_txt).toISOString().split("T")[0];
+                return itemDate === targetDate;
+            });
+        };
+        
+        // Example usage
+        const targetDate = "2024-10-29";
+        const dataForTargetDate = extractDataForDate(weatherData1, targetDate);
+
+        
+
+        useEffect(() => {
+            if (!weatherData1) {
+                return
+            }else{
+            console.log(dataForTargetDate);
+
+            }
+        }, [weatherData1]);
+
+    
+        
+        
+        
         
 
     
@@ -305,6 +343,11 @@ const HomePage = () => {
                         <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
                         <h3 className="degrees">20C</h3>
                         <h3 className="degrees">Monday, 1st Oct</h3>
+                    </div>
+                    <div className="weekdaystempo">
+                        <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
+                        <h3 className="degrees">20C</h3>
+                        <h3 className="degrees">Tuesday, 1st Oct</h3>
                     </div>
                     </div>
  
