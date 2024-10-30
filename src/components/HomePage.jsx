@@ -100,7 +100,7 @@ const HomePage = () => {
 
 
 
-            
+
         const displayImage = () => {
             if (weatherData2 && weatherData2?.weather?.[0].icon) {
                 const iconCode = weatherData2?.weather[0].icon;
@@ -203,10 +203,9 @@ const HomePage = () => {
 
         const extractDataForDateRange = (weatherData1) => {
             // Calculate the dynamic start and end dates
+            if(!weatherData1) return
             const startDate = new Date().toISOString().split("T")[0];
-            const endDate = new Date(new Date().setDate(new Date().getDate() + 3))
-                .toISOString()
-                .split("T")[0];
+            const endDate = new Date(new Date().setDate(new Date().getDate() + 3)).toISOString().split("T")[0];
             
             // Filter for items within the date range
             return weatherData1?.list?.filter(list => {
@@ -214,7 +213,6 @@ const HomePage = () => {
                 console.log(itemDate)
                 return itemDate >= startDate && itemDate <= endDate;
             });
-
         };        
         
 
@@ -223,8 +221,11 @@ const HomePage = () => {
                 return
             }else{
                 extractDataForDateRange()
+                const filteredData = extractDataForDateRange(weatherData1)
+                console.log(filteredData)
             }
         }, [weatherData1]);
+
 
 
 
