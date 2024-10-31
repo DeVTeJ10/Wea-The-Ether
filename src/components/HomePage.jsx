@@ -29,10 +29,15 @@ const HomePage = () => {
     const [forecastHour4, setForecastHour4] = useState("")
     const [forecastHour5, setForecastHour5] = useState("")
 
+    let [dataWeather] = useState([])
+    // let weatherdata = useState([])
+
+
     const apiKey = 'b96e0a473aed03ed2ffcdd3d32e5f323' // Api key needed for both apis to work
 
 
     
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -87,6 +92,7 @@ const HomePage = () => {
                 displayImage()
                 displayForecastImage()
                 extractDataForDateRange()
+                collectWeatherData()
         })
             .catch(error => {
                 console.error('Error', error)
@@ -205,31 +211,49 @@ const HomePage = () => {
             // Calculate the dynamic start and end dates
             if(!weatherData1) return
             const startDate = new Date().toISOString().split("T")[0];
-            const endDate = new Date(new Date().setDate(new Date().getDate() + 3)).toISOString().split("T")[0];
+            const endDate = new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().split("T")[0];
             
             // Filter for items within the date range
             return weatherData1?.list?.filter(list => {
                 const itemDate = new Date(list?.dt_txt).toISOString().split("T")[0];
-                console.log(itemDate)
                 return itemDate >= startDate && itemDate <= endDate;
             });
         };        
         
-
         useEffect(() => {
             if (!weatherData1 && !weatherInput) {
                 return
             }else{
                 extractDataForDateRange()
                 const filteredData = extractDataForDateRange(weatherData1)
-                console.log(filteredData)
+                dataWeather.push(filteredData)
+                console.log("Available weather data:", dataWeather)
             }
         }, [weatherData1]);
 
 
 
+        const collectWeatherData = (dataWeather) => {
+            if(!weatherData1 && !dataWeather)
+            if (weatherData1 && dataWeather)  {
+                dataWeather.map(datasWeather => {
+                    const trythis = datasWeather?.main?.dt
+                    console.log(trythis)
+                })
+            }
+        };
+        // useEffect(() => {
+        //     if (!weatherData1 && !dataWeather) {
+        //         return 
+        //     }else{
+        //         collectWeatherData()
+        //         const checking = collectWeatherData(dataWeather); 
+        //         console.log(checking)
+        //     }
+        // }, [weatherData1 && dataWeather]);
 
-    
+
+
   return (
 
     <div>
