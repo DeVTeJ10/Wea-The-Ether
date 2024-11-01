@@ -30,6 +30,7 @@ const HomePage = () => {
     const [forecastHour5, setForecastHour5] = useState("")
 
     let [dataWeather] = useState([])
+    let [datasWeather] = useState([])
     // let weatherdata = useState([])
 
 
@@ -233,15 +234,37 @@ const HomePage = () => {
 
 
 
-        const collectWeatherData = (dataWeather) => {
-            if(!weatherData1 && !dataWeather)
-            if (weatherData1 && dataWeather)  {
-                dataWeather.map(datasWeather => {
-                    const trythis = datasWeather?.main?.dt
-                    console.log(trythis)
-                })
+        const processWeatherData = (dataWeather) => {
+            // Ensure `dataWeather` is an array with at least one entry (that contains Array(12))
+            if (!Array.isArray(dataWeather) || dataWeather.length === 0 || !Array.isArray(dataWeather[0])) {
+                console.warn("Data structure is not as expected.");
+                return;
             }
+            
+            // Map through each object in `Array(12)`
+            const mappedData = dataWeather[0].map((entry) => {
+                // Access the individual properties within each entry
+                const dateTime = entry.dt; // For example, the timestamp
+                const temperature = entry.main?.temp; // Access temperature if it exists in `main`
+                const weatherCondition = entry.weather?.[0]?.description; // Description of weather condition
+                
+                console.log({ dateTime, temperature, weatherCondition });
+                
+                // Return an object or any other structure with the values you want to extract
+                return { dateTime, temperature, weatherCondition };
+            });
+            
+            console.log("Processed Data:", mappedData); // Log the complete mapped data array
+            return mappedData; // Return the processed data if needed
         };
+        
+        // Example call with your data
+        processWeatherData(dataWeather);
+        
+        
+
+
+        
         // useEffect(() => {
         //     if (!weatherData1 && !dataWeather) {
         //         return 
