@@ -93,7 +93,8 @@ const HomePage = () => {
                 displayImage()
                 displayForecastImage()
                 extractDataForDateRange()
-                collectWeatherData()
+                processWeatherData()
+
         })
             .catch(error => {
                 console.error('Error', error)
@@ -208,11 +209,13 @@ const HomePage = () => {
 
 
 
+
+
         const extractDataForDateRange = (weatherData1) => {
             // Calculate the dynamic start and end dates
             if(!weatherData1) return
             const startDate = new Date().toISOString().split("T")[0];
-            const endDate = new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().split("T")[0];
+            const endDate = new Date(new Date().setDate(new Date().getDate() + 35)).toISOString().split("T")[0];
             
             // Filter for items within the date range
             return weatherData1?.list?.filter(list => {
@@ -234,19 +237,23 @@ const HomePage = () => {
 
 
 
-        const processWeatherData = (dataWeather) => {
-            // Ensure `dataWeather` is an array with at least one entry (that contains Array(12))
-            if (!Array.isArray(dataWeather) || dataWeather.length === 0 || !Array.isArray(dataWeather[0])) {
-                console.warn("Data structure is not as expected.");
+
+
+
+        const processWeatherData =  (dataWeather) => {
+            // Ensure `dataWeather` is an array with at least one entry.
+            if (!dataWeather) return
+            if (!Array.isArray(dataWeather[0]) || dataWeather.length === 0) {
+                // console.warn("Data structure is not as expected.");
                 return;
             }
             
             // Map through each object in `Array(12)`
-            const mappedData = dataWeather[0].map((entry) => {
+            const mappedData =  dataWeather[0].map((entry) => {
                 // Access the individual properties within each entry
-                const dateTime = entry.dt; // For example, the timestamp
-                const temperature = entry.main?.temp; // Access temperature if it exists in `main`
-                const weatherCondition = entry.weather?.[0]?.description; // Description of weather condition
+                const dateTime = entry?.dt; // For example, the timestamp
+                const temperature = entry?.main?.temp; // Access temperature if it exists in `main`
+                const weatherCondition = entry?.weather?.[0]?.description; // Description of weather condition
                 
                 console.log({ dateTime, temperature, weatherCondition });
                 
@@ -262,19 +269,19 @@ const HomePage = () => {
         processWeatherData(dataWeather);
         
         
+        useEffect(() => {
+            if (!dataWeather && !Array.isArray(dataWeather[0]) || dataWeather.length === 0) {
+                return
+            }else{
+                processWeatherData()
+                const filteredData = processWeatherData()
+                if (!filteredData) return 
+                console.log("Available weather data:", filteredData)
+            }
+        }, [weatherData1]);
 
 
-        
-        // useEffect(() => {
-        //     if (!weatherData1 && !dataWeather) {
-        //         return 
-        //     }else{
-        //         collectWeatherData()
-        //         const checking = collectWeatherData(dataWeather); 
-        //         console.log(checking)
-        //     }
-        // }, [weatherData1 && dataWeather]);
-
+    
 
 
   return (
