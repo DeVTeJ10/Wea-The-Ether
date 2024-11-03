@@ -244,14 +244,12 @@ const HomePage = () => {
             // Ensure `dataWeather` is an array with at least one entry.
             if (!dataWeather) return
             if (!Array.isArray(dataWeather[0]) || dataWeather.length === 0) {
-                // console.warn("Data structure is not as expected.");
                 return;
             }
-            
             // Map through each object in `Array(12)`
             const mappedData =  dataWeather[0].map((entry) => {
                 // Access the individual properties within each entry
-                const dateTime = entry?.dt; // For example, the timestamp
+                const dateTime = entry?.dt_txt; // For example, the timestamp
                 const temperature = entry?.main?.temp; // Access temperature if it exists in `main`
                 const weatherCondition = entry?.weather?.[0]?.description; // Description of weather condition
                 
@@ -260,20 +258,18 @@ const HomePage = () => {
                 // Return an object or any other structure with the values you want to extract
                 return { dateTime, temperature, weatherCondition };
             });
-            
             console.log("Processed Data:", mappedData); // Log the complete mapped data array
             return mappedData; // Return the processed data if needed
         };
         
         // Example call with your data
-        processWeatherData(dataWeather);
-        
+        // processWeatherData(dataWeather);
         
         useEffect(() => {
             if (!dataWeather && !Array.isArray(dataWeather[0]) || dataWeather.length === 0) {
                 return
             }else{
-                processWeatherData()
+                processWeatherData(dataWeather)
                 const filteredData = processWeatherData()
                 if (!filteredData) return 
                 console.log("Available weather data:", filteredData)
