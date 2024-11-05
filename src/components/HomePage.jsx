@@ -34,9 +34,20 @@ const HomePage = () => {
     const [day3, setDay3] = useState("")
     const [day4, setDay4] = useState("")
     const [day5, setDay5] = useState("")
+    const [day6, setDay6] =  useState("")
 
     let [dataWeather] = useState([])
     let [datasWeather] = useState([])
+
+    let [day1Temp, setDay1Temp] = useState("")
+    let [day2Temp, setDay2Temp] = useState("")
+    let [day3Temp, setDay3Temp] = useState("")
+    let [day4Temp, setDay4Temp] = useState("")
+    let [day5Temp, setDay5Temp] = useState("")
+    let [day6Temp, setDay6Temp] = useState("")
+
+
+
     // let weatherdata = useState([])
 
 
@@ -253,27 +264,34 @@ const HomePage = () => {
             // Map through each object in `Array(12)`
             const mappedData =  dataWeather[0].map((entry) => {
                 // Access the individual properties within each entry
-                const dateTime1 = new Date(entry?.dt_txt) // For example, the timestamp
+                const dateTime1 = new Date(new Date(entry?.dt_txt).setDate(new Date().getDate() + 0)).toISOString().split("T")[0];
                 const dateTime2 = new Date(new Date(entry?.dt_txt).setDate(new Date().getDate() + 1)).toISOString().split("T")[0];
                 const dateTime3 = new Date(new Date(entry?.dt_txt).setDate(new Date().getDate() + 2)).toISOString().split("T")[0];
+                const dateTime4 = new Date(new Date(entry?.dt_txt).setDate(new Date().getDate() + 3)).toISOString().split("T")[0];
+                const dateTime5 = new Date(new Date(entry?.dt_txt).setDate(new Date().getDate() + 4)).toISOString().split("T")[0];
+                const dateTime6 = new Date(new Date(entry?.dt_txt).setDate(new Date().getDate() + 5)).toISOString().split("T")[0];
                 const temperature = entry?.main?.temp; // Access temperature if it exists in `main`
                 const weatherCondition = entry?.weather?.[0]?.description; // Description of weather condition
 
 
+
                 setDay2(dateTime2)
                 setDay3(dateTime3)
+                setDay4(dateTime4)
+                setDay5(dateTime5)
+                setDay6(dateTime6)
 
-                console.log(dateTime2)
-                // console.log({dateTime1, temperature, weatherCondition });
-                // console.log({dateTime1, dateTime2, temperature, weatherCondition });
+                // console.log(entry)
                 
-                // Return an object or any other structure with the values you want to extract
-                // return {  dateTime1, temperature, weatherCondition };
+                // const weatherTemperature = entry
+                console.log("Values for the day:", entry)
+                console.log("date:", dateTime1)
+
                 return {  dateTime1, dateTime2, temperature, weatherCondition };
-            // console.log("date time 2:", dateTime2)
 
             });
             console.log("Processed Data:", mappedData); // Log the complete mapped data array
+            
             return mappedData; // Return the processed data if needed
         };
         
@@ -281,20 +299,19 @@ const HomePage = () => {
         // processWeatherData(dataWeather);
         
         useEffect(() => {
-            if (!dataWeather && !Array.isArray(dataWeather[0]) || dataWeather.length === 0) {
+            if (!dataWeather && !Array.isArray(dataWeather) || dataWeather.length === 0) {
                 return
             }else{
-                processWeatherData(dataWeather)
-                const filteredData = processWeatherData()
+                // processWeatherData(dataWeather)
+                const filteredData = processWeatherData(dataWeather)
                 if (!filteredData) return 
                 console.log("Available weather data:", filteredData)
-                console.log("date time 2:", dateTime2)
+                // console.log("date time 2:", dateTime2)
             }
         }, [weatherData1]);
 
 
     
-
 
   return (
 
@@ -354,19 +371,19 @@ const HomePage = () => {
  
                 <div>
                     <div>
-                    <h4>humidity is:</h4>
+                    <h4>humidity:</h4>
                     <h3>{weatherData2?.main?.humidity}</h3>
                     </div>
                     <div>
-                    <h4>Pressure is:</h4>
+                    <h4>Pressure:</h4>
                     <h3>{weatherData2?.main?.pressure}</h3>
                     </div>
                     
                 </div>
                 <div className="wind">
-                    <h4>windspeed is:</h4>
+                    <h4>windspeed:</h4>
                     <h3>{weatherData2?.wind?.speed}</h3>
-                    <h4>Wind gust is:</h4>
+                    <h4>Wind gust:</h4>
                     <h3>{weatherData2?.wind?.gust}</h3>
                 </div>
                 </div>
@@ -398,17 +415,17 @@ const HomePage = () => {
                     <div className="weekdaystempo">
                         <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
                         <h3 className="degrees">20C</h3>
-                        <h3 className="degrees">Sunday, 1st Oct</h3>
+                        <h3 className="degrees">{day4}</h3>
                     </div>
                     <div className="weekdaystempo">
                         <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
                         <h3 className="degrees">20C</h3>
-                        <h3 className="degrees">Monday, 1st Oct</h3>
+                        <h3 className="degrees">{day5}</h3>
                     </div>
                     <div className="weekdaystempo">
                         <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
                         <h3 className="degrees">20C</h3>
-                        <h3 className="degrees">Tuesday, 1st Oct</h3>
+                        <h3 className="degrees">{day6}</h3>
                     </div>
                     </div>
  
