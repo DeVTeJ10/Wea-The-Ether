@@ -310,6 +310,53 @@ const HomePage = () => {
         }, [weatherData1]);
 
 
+        // function getDatesForNextNDays(n) {
+        //     const dates = [];
+        //     const today = new Date();
+        //     for (let i = 1; i <= n; i++) {
+        //       const nextDate = new Date(today);
+        //       nextDate.setDate(today.getDate() + i);
+        //       dates.push(nextDate.toISOString().split("T")[0]);
+        //     }
+        //     return dates;
+        //   }
+        
+        //   useEffect(() => {
+        //     // Fetch data from the API
+        //     async function fetchData() {
+        //       try {
+        //         const response = await axios.get('https://api.example.com/data'); // Replace with actual API URL
+        //         setData(response.data);
+        //       } catch (error) {
+        //         console.error("Error fetching data:", error);
+        //       }
+        //     }
+            
+        //     fetchData();
+        //   }, []); // Empty dependency array means it runs once when the component mounts
+        
+        //   useEffect(() => {
+        //     // Only run filtering if `data` is not empty
+        //     if (data.length > 0) {
+        //       const targetDates = getDatesForNextNDays(7);
+        
+        //       // Filter entries that match the target dates
+        //       const matchingEntries = [];
+        //       data.forEach((item) => {
+        //         item.entries.forEach((entry) => {
+        //           if (targetDates.includes(entry.date)) {
+        //             matchingEntries.push(entry);
+        //           }
+        //         });
+        //       });
+        
+        //       // Update state with the filtered entries
+        //       setSelectedEntries(matchingEntries);
+        //     }
+        //   }, [data]); // Runs whenever `data` changes
+        
+
+
     
 
   return (
