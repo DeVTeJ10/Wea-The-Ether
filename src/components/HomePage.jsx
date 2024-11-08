@@ -110,7 +110,7 @@ const HomePage = () => {
                 displayImage()
                 displayForecastImage()
                 extractDataForDateRange()
-                processWeatherData()
+                // processWeatherData()
 
         })
             .catch(error => {
@@ -256,105 +256,60 @@ const HomePage = () => {
 
 
 
-        const processWeatherData =  (dataWeather) => {
-            // Ensure `dataWeather` is an array with at least one entry.
-            if (!dataWeather) return
-            if (!Array.isArray(dataWeather[0]) || dataWeather.length === 0) {
-                return;
-            }
-            // Map through each object in `Array(12)`
-            const mappedData =  dataWeather[0].map((entry) => {
-                // Access the individual properties within each entry
-                const dateTime1 = new Date(new Date(entry?.dt_txt).setDate(new Date().getDate() +1)).toISOString().split("T")[0];
-                const dateTime2 = new Date(new Date(entry?.dt_txt).setDate(new Date().getDate() + 2)).toISOString().split("T")[0];
-                const dateTime3 = new Date(new Date(entry?.dt_txt).setDate(new Date().getDate() + 3)).toISOString().split("T")[0];
-                const dateTime4 = new Date(new Date(entry?.dt_txt).setDate(new Date().getDate() + 4)).toISOString().split("T")[0];
-                const dateTime5 = new Date(new Date(entry?.dt_txt).setDate(new Date().getDate() + 5)).toISOString().split("T")[0];
+        // const processWeatherData =  (dataWeather) => {
+        //     // Ensure `dataWeather` is an array with at least one entry.
+        //     if (!dataWeather) return
+        //     if (!Array.isArray(dataWeather[0]) || dataWeather.length === 0) {
+        //         return;
+        //     }
+        //     // Map through each object in `Array(12)`
+        //     const mappedData =  dataWeather[0].map((entry) => {
+        //         // Access the individual properties within each entry
+        //         const dateTime1 = new Date(new Date(entry?.dt_txt).setDate(new Date().getDate() +1)).toISOString().split("T")[0];
+        //         const dateTime2 = new Date(new Date(entry?.dt_txt).setDate(new Date().getDate() + 2)).toISOString().split("T")[0];
+        //         const dateTime3 = new Date(new Date(entry?.dt_txt).setDate(new Date().getDate() + 3)).toISOString().split("T")[0];
+        //         const dateTime4 = new Date(new Date(entry?.dt_txt).setDate(new Date().getDate() + 4)).toISOString().split("T")[0];
+        //         const dateTime5 = new Date(new Date(entry?.dt_txt).setDate(new Date().getDate() + 5)).toISOString().split("T")[0];
 
-                const temperature = entry?.main?.temp; // Access temperature if it exists in `main`
-                const weatherCondition = entry?.weather?.[0]?.description; // Description of weather condition
+        //         const temperature = entry?.main?.temp; // Access temperature if it exists in `main`
+        //         const weatherCondition = entry?.weather?.[0]?.description; // Description of weather condition
 
 
-                setDay1(dateTime1)
-                setDay2(dateTime2)
-                setDay3(dateTime3)
-                setDay4(dateTime4)
-                setDay5(dateTime5)
+        //         setDay1(dateTime1)
+        //         setDay2(dateTime2)
+        //         setDay3(dateTime3)
+        //         setDay4(dateTime4)
+        //         setDay5(dateTime5)
 
-                // console.log(dateTime1, dateTime2, dateTime3, dateTime4, dateTime5, dateTime6)
-                // console.log("Values for the day:", entry)
-                // console.log("date:", dateTime1)
+        //         // console.log(dateTime1, dateTime2, dateTime3, dateTime4, dateTime5, dateTime6)
+        //         // console.log("Values for the day:", entry)
+        //         // console.log("date:", dateTime1)
 
-                return { dateTime1, dateTime2, dateTime3, dateTime4, dateTime5, temperature, weatherCondition };
+        //         return { dateTime1, dateTime2, dateTime3, dateTime4, dateTime5, temperature, weatherCondition };
 
-            });
-            console.log("Processed Data:", mappedData); // Log the complete mapped data array
+        //     });
+        //     // console.log("Processed Data:", mappedData); // Log the complete mapped data array
             
-            return mappedData; // Return the processed data if needed
-        };
+        //     return mappedData; // Return the processed data if needed
+        // };
         
-        // Example call with your data
-        // processWeatherData(dataWeather);
+        // // Example call with your data
+        // // processWeatherData(dataWeather);
         
-        useEffect(() => {
-            if (!dataWeather && !Array.isArray(dataWeather) || dataWeather.length === 0) {
-                return
+        // useEffect(() => {
+        //     if (!dataWeather && !Array.isArray(dataWeather) || dataWeather.length === 0) {
+        //         return
                 
-            }else{
-                // processWeatherData(dataWeather)
-                const filteredData = processWeatherData(dataWeather)
-                if (!filteredData) return 
-                console.log("Available weather data:", filteredData)
-                // console.log("date time 2:", dateTime2)
-            }
-        }, [weatherData1]);
+        //     }else{
+        //         // processWeatherData(dataWeather)
+        //         const filteredData = processWeatherData(dataWeather)
+        //         if (!filteredData) return 
+        //         console.log("Available weather data:", filteredData)
+        //         // console.log("date time 2:", dateTime2)
+        //     }
+        // }, [weatherData1]);
 
 
-        // function getDatesForNextNDays(n) {
-        //     const dates = [];
-        //     const today = new Date();
-        //     for (let i = 1; i <= n; i++) {
-        //       const nextDate = new Date(today);
-        //       nextDate.setDate(today.getDate() + i);
-        //       dates.push(nextDate.toISOString().split("T")[0]);
-        //     }
-        //     return dates;
-        //   }
-        
-        //   useEffect(() => {
-        //     // Fetch data from the API
-        //     async function fetchData() {
-        //       try {
-        //         const response = await axios.get('https://api.example.com/data'); // Replace with actual API URL
-        //         setData(response.data);
-        //       } catch (error) {
-        //         console.error("Error fetching data:", error);
-        //       }
-        //     }
-            
-        //     fetchData();
-        //   }, []); // Empty dependency array means it runs once when the component mounts
-        
-        //   useEffect(() => {
-        //     // Only run filtering if `data` is not empty
-        //     if (data.length > 0) {
-        //       const targetDates = getDatesForNextNDays(7);
-        
-        //       // Filter entries that match the target dates
-        //       const matchingEntries = [];
-        //       data.forEach((item) => {
-        //         item.entries.forEach((entry) => {
-        //           if (targetDates.includes(entry.date)) {
-        //             matchingEntries.push(entry);
-        //           }
-        //         });
-        //       });
-        
-        //       // Update state with the filtered entries
-        //       setSelectedEntries(matchingEntries);
-        //     }
-        //   }, [data]); // Runs whenever `data` changes
-        
 
 
     
