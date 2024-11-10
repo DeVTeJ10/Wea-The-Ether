@@ -110,6 +110,7 @@ const HomePage = () => {
                 displayImage()
                 displayForecastImage()
                 extractDataForDateRange()
+                getDateRange()
                 // processWeatherData()
 
         })
@@ -310,6 +311,27 @@ const HomePage = () => {
         }, [weatherData1]);
 
 
+
+        const getDateRange = () => {
+            // Calculate the dynamic start and end dates
+            const today = new Date();
+            const tomorrow = new Date(today); // Copy today's date
+            const nextTomorrow = new Date(today)
+            tomorrow.setDate(today.getDate() + 1); // Add one day
+            nextTomorrow.setDate(today.getDate() + 2)
+        
+            const tomorrowsDate = tomorrow.toISOString().split('T')[0];
+            const nextTomorrowDate = nextTomorrow.toISOString().split('T')[0];
+            console.log(tomorrowsDate);
+            console.log(nextTomorrowDate)
+        };
+        
+            useEffect(() => {
+                if (!weatherData1) return
+                else{
+                    getDateRange(); 
+                }
+            }, [weatherData1]);
 
 
     
