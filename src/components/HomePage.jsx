@@ -317,13 +317,27 @@ const HomePage = () => {
             const today = new Date();
             const tomorrow = new Date(today); // Copy today's date
             const nextTomorrow = new Date(today)
+            const dayAfterNextTomorrow = new Date(today)
+            const twoDaysFromTomorrow = new Date(today)
+            const threeDaysFromTomorrow = new Date(today)
+
             tomorrow.setDate(today.getDate() + 1); // Add one day
             nextTomorrow.setDate(today.getDate() + 2)
+            dayAfterNextTomorrow.setDate(today.getDate() + 3)
+            twoDaysFromTomorrow.setDate(today.getDate() + 4)
+            threeDaysFromTomorrow.setDate(today.getDate() + 5)
         
             const tomorrowsDate = tomorrow.toISOString().split('T')[0];
             const nextTomorrowDate = nextTomorrow.toISOString().split('T')[0];
+            const dayAfterNextTomorrowDate = dayAfterNextTomorrow.toISOString().split('T')[0]
+            const twoDaysFromTomorrowDate = twoDaysFromTomorrow.toISOString().split('T')[0]
+            const threeDaysFromTomorrowDate = threeDaysFromTomorrow.toISOString().split('T')[0]
+
             console.log(tomorrowsDate);
             console.log(nextTomorrowDate)
+            console.log(dayAfterNextTomorrowDate)
+            console.log(twoDaysFromTomorrowDate)
+            console.log(threeDaysFromTomorrowDate)
         };
         
             useEffect(() => {
