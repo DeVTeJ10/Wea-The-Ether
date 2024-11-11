@@ -36,9 +36,12 @@ const HomePage = () => {
     const [day4, setDay4] = useState("")
     const [day5, setDay5] = useState("")
 
+    const [startingDate, setStartDate] = useState("")
+    const [endingDate, setEndDate] = useState("")
+
 
     let [dataWeather] = useState([])
-    let [datasWeather] = useState([])
+    // let [datasWeather] = useState([])
 
     let [day1Temp, setDay1Temp] = useState("")
     let [day2Temp, setDay2Temp] = useState("")
@@ -111,7 +114,7 @@ const HomePage = () => {
                 displayForecastImage()
                 extractDataForDateRange()
                 getDateRange()
-                // processWeatherData()
+
 
         })
             .catch(error => {
@@ -228,18 +231,32 @@ const HomePage = () => {
 
 
 
-
         const extractDataForDateRange = (weatherData1) => {
             // Calculate the dynamic start and end dates
             if(!weatherData1) return
             const startDate = new Date().toISOString().split("T")[0];
             const endDate = new Date(new Date().setDate(new Date().getDate() + 6)).toISOString().split("T")[0];
+
+
+            setStartDate(startingDate)
+            setEndDate(endingDate)
+
+            console.log("starting date:", startDate)
+            console.log("ending date:", endDate)
+
+            if (day1 >= startDate && day1 <= endDate){
+                console.log("this is true")
+            }else{
+                console.log("how true is this")
+            }
             
             // Filter for items within the date range
             return weatherData1?.list?.filter(list => {
                 const itemDate = new Date(list?.dt_txt).toISOString().split("T")[0];
                 return itemDate >= startDate && itemDate <= endDate;
+                
             });
+
         };        
         
         useEffect(() => {
@@ -248,84 +265,31 @@ const HomePage = () => {
             }else{
                 extractDataForDateRange()
                 const filteredData = extractDataForDateRange(weatherData1)
-                dataWeather.push(filteredData)
-                console.log("Available weather data:", dataWeather)
-            }
-        }, [weatherData1]);
-
-
-
-
-
-        const processWeatherData =  (dataWeather) => {
-            // Ensure `dataWeather` is an array with at least one entry.
-            if (!dataWeather) return
-            if (!Array.isArray(dataWeather[0]) || dataWeather.length === 0) {
-                return;
-            }
-            // Map through each object in `Array(12)`
-            const mappedData =  dataWeather[0].map((entry) => {
-                // Access the individual properties within each entry
-                const dateTime1 = new Date(new Date(entry?.dt_txt).setDate(new Date().getDate() +1)).toISOString().split("T")[0];
-                const dateTime2 = new Date(new Date(entry?.dt_txt).setDate(new Date().getDate() + 2)).toISOString().split("T")[0];
-                const dateTime3 = new Date(new Date(entry?.dt_txt).setDate(new Date().getDate() + 3)).toISOString().split("T")[0];
-                const dateTime4 = new Date(new Date(entry?.dt_txt).setDate(new Date().getDate() + 4)).toISOString().split("T")[0];
-                const dateTime5 = new Date(new Date(entry?.dt_txt).setDate(new Date().getDate() + 5)).toISOString().split("T")[0];
-
-                const temperature = entry?.main?.temp; // Access temperature if it exists in `main`
-                const weatherCondition = entry?.weather?.[0]?.description; // Description of weather condition
-
-
-                setDay1(dateTime1)
-                setDay2(dateTime2)
-                setDay3(dateTime3)
-                setDay4(dateTime4)
-                setDay5(dateTime5)
-
-                // console.log(dateTime1, dateTime2, dateTime3, dateTime4, dateTime5, dateTime6)
-                // console.log("Values for the day:", entry)
-                // console.log("date:", dateTime1)
-
-                return { dateTime1, dateTime2, dateTime3, dateTime4, dateTime5, temperature, weatherCondition };
-
-            });
-            // console.log("Processed Data:", mappedData); // Log the complete mapped data array
-            
-            return mappedData; // Return the processed data if needed
-        };
-        
-        // Example call with your data
-        // processWeatherData(dataWeather);
-        
-        useEffect(() => {
-            if (!dataWeather && !Array.isArray(dataWeather) || dataWeather.length === 0) {
-                return
-                
-            }else{
-                // processWeatherData(dataWeather)
-                const filteredData = processWeatherData(dataWeather)
-                if (!filteredData) return 
+                // dataWeather.push(filteredData)
                 console.log("Available weather data:", filteredData)
-                // console.log("date time 2:", dateTime2)
+                getDateRange()
             }
         }, [weatherData1]);
+
+
+
 
 
 
         const getDateRange = () => {
             // Calculate the dynamic start and end dates
             const today = new Date();
-            const tomorrow = new Date(today); // Copy today's date
-            const nextTomorrow = new Date(today)
-            const dayAfterNextTomorrow = new Date(today)
-            const twoDaysFromTomorrow = new Date(today)
-            const threeDaysFromTomorrow = new Date(today)
+            const tomorrow = new Date(today + 1); // Copy today's date
+            const nextTomorrow = new Date(tomorrow)
+            const dayAfterNextTomorrow = new Date(nextTomorrow)
+            const twoDaysFromTomorrow = new Date(dayAfterNextTomorrow)
+            const threeDaysFromTomorrow = new Date(twoDaysFromTomorrow)
 
-            tomorrow.setDate(today.getDate() + 1); // Add one day
-            nextTomorrow.setDate(today.getDate() + 2)
-            dayAfterNextTomorrow.setDate(today.getDate() + 3)
-            twoDaysFromTomorrow.setDate(today.getDate() + 4)
-            threeDaysFromTomorrow.setDate(today.getDate() + 5)
+            tomorrow.setDate(today.getDate() + 1); // returns value for the following day
+            nextTomorrow.setDate(today.getDate() + 2); // returns value for the day after tomorrow
+            dayAfterNextTomorrow.setDate(today.getDate() + 3); // returns value for 2 days after tomorrow
+            twoDaysFromTomorrow.setDate(today.getDate() + 4); // returns value for 3 days after tomorrow
+            threeDaysFromTomorrow.setDate(today.getDate() + 5); // returns value for 4 days after tomorrow
         
             const tomorrowsDate = tomorrow.toISOString().split('T')[0];
             const nextTomorrowDate = nextTomorrow.toISOString().split('T')[0];
@@ -338,6 +302,12 @@ const HomePage = () => {
             console.log(dayAfterNextTomorrowDate)
             console.log(twoDaysFromTomorrowDate)
             console.log(threeDaysFromTomorrowDate)
+
+            setDay1(tomorrowsDate)
+            setDay2(nextTomorrowDate)
+            setDay3(dayAfterNextTomorrowDate)
+            setDay4(twoDaysFromTomorrowDate)
+            setDay5(threeDaysFromTomorrowDate)
         };
         
             useEffect(() => {
