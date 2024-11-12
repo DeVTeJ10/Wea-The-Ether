@@ -51,6 +51,10 @@ const HomePage = () => {
     let [day6Temp, setDay6Temp] = useState("")
 
 
+    const [checkingThisValuesYeahState, setCheckingThisValuesYeahState] = useState(null);
+
+
+
 
     // let weatherdata = useState([])
 
@@ -114,6 +118,7 @@ const HomePage = () => {
                 displayForecastImage()
                 extractDataForDateRange()
                 getDateRange()
+                extractTemperatureFromDateRange()
 
 
         })
@@ -231,9 +236,9 @@ const HomePage = () => {
 
 
 
-        const extractDataForDateRange = (weatherData1) => {
+        const extractDataForDateRange =  (weatherData1) => {
             // Calculate the dynamic start and end dates
-            if(!weatherData1) return
+            if(!weatherData1 && !dataWeather && !weatherInput) return
             const startDate = new Date().toISOString().split("T")[0];
             const endDate = new Date(new Date().setDate(new Date().getDate() + 6)).toISOString().split("T")[0];
 
@@ -244,33 +249,45 @@ const HomePage = () => {
             console.log("starting date:", startDate)
             console.log("ending date:", endDate)
 
-            if (day1 >= startDate && day1 <= endDate){
-                console.log("this is true")
-            }else{
-                console.log("how true is this")
-            }
-            
             // Filter for items within the date range
             return weatherData1?.list?.filter(list => {
                 const itemDate = new Date(list?.dt_txt).toISOString().split("T")[0];
                 return itemDate >= startDate && itemDate <= endDate;
                 
             });
-
         };        
         
         useEffect(() => {
-            if (!weatherData1 && !weatherInput) {
+            if (!weatherData1 && !weatherInput && dataWeather) {
                 return
             }else{
                 extractDataForDateRange()
                 const filteredData = extractDataForDateRange(weatherData1)
-                // dataWeather.push(filteredData)
+                dataWeather.push(filteredData)
                 console.log("Available weather data:", filteredData)
                 getDateRange()
             }
         }, [weatherData1]);
 
+
+
+        const extractTemperatureFromDateRange =  (dataWeather) => {
+
+            // if (!dataWeather && !weatherInput) return;
+            // for (let i = 0; i < dataWeather.length; i++) {
+            //     if (day1 >= startDate && day1 <= endDate && dataWeather && weatherInput){
+            //         dataWeather.forEach((values) => {
+            //         // console.log("checking mapping dataWeather", dataWeather)
+            //         const checkingThisvaluesYeah =  values?.[1].main?.temp
+            //         console.log("check mic 1, 2", checkingThisvaluesYeah)
+            //         console.log("trying to get values", dataWeather)
+            //         // setCheckingThisValuesYeahState(checkingThisvaluesYeah)
+            //         })
+            //     }
+            //         }
+
+            console.log("Trying to check if dataWeather available",dataWeather)
+        }
 
 
 
@@ -311,7 +328,7 @@ const HomePage = () => {
         };
         
             useEffect(() => {
-                if (!weatherData1) return
+                if (!weatherData1 && !weatherInput) return
                 else{
                     getDateRange(); 
                 }
