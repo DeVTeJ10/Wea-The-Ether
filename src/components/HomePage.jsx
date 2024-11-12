@@ -271,7 +271,7 @@ const HomePage = () => {
 
 
 
-        const extractTemperatureFromDateRange =  (dataWeather) => {
+        const extractTemperatureFromDateRange =  () => {
 
             // if (!dataWeather && !weatherInput) return;
             // for (let i = 0; i < dataWeather.length; i++) {
