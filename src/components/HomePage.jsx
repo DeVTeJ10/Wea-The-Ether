@@ -236,8 +236,11 @@ const HomePage = () => {
 
 
 
-        const extractDataForDateRange =  (weatherData1) => {
-            // Calculate the dynamic start and end dates
+        const extractDataForDateRange =  (weatherData1) => {  // 1) This function is setting the startdate and endate of possible 
+            // Calculate the dynamic start and end dates      // contd... from (1) available data, "itemDate" then maps through
+                                                              // contd... from (1- -) list.dt_txt and compares the date to start
+                                                              // cont... from (1- - -) and end date. 
+                                                              // cont... from (1 - - - -) (this function only gives me a range of dates ...)
             if(!weatherData1 && !dataWeather && !weatherInput) return
             const startDate = new Date().toISOString().split("T")[0];
             const endDate = new Date(new Date().setDate(new Date().getDate() + 6)).toISOString().split("T")[0];
@@ -252,7 +255,7 @@ const HomePage = () => {
             // Filter for items within the date range
             return weatherData1?.list?.filter(list => {
                 const itemDate = new Date(list?.dt_txt).toISOString().split("T")[0];
-                return itemDate >= startDate && itemDate <= endDate;
+                 return itemDate >= startDate && itemDate <= endDate;
                 
             });
         };        
@@ -294,6 +297,8 @@ const HomePage = () => {
 
 
         const getDateRange = () => {
+
+            if(!dataWeather && !weatherInput) return
             // Calculate the dynamic start and end dates
             const today = new Date();
             const tomorrow = new Date(today + 1); // Copy today's date
@@ -328,15 +333,15 @@ const HomePage = () => {
         };
         
             useEffect(() => {
-                if (!weatherData1 && !weatherInput) return
-                else{
+                if (weatherData1 && weatherInput && dataWeather){
                     getDateRange(); 
+                    console.log("checking data forecast 1st day",day1)
                 }
             }, [weatherData1]);
 
 
-    
 
+    
   return (
 
     <div>
@@ -354,7 +359,6 @@ const HomePage = () => {
             <button className="weatherBTN" type="submit">Enter</button>
             </div>
         </div>
-
 
     {/* <div>
         
