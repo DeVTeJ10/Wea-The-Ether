@@ -40,8 +40,8 @@ const HomePage = () => {
     const [endingDate, setEndDate] = useState("")
 
 
-    let [dataWeather] = useState([])
-    // let [datasWeather] = useState([])
+    let [dataWeather] = useState([""])
+    
 
     let [day1Temp, setDay1Temp] = useState("")
     let [day2Temp, setDay2Temp] = useState("")
@@ -118,8 +118,6 @@ const HomePage = () => {
                 displayForecastImage()
                 extractDataForDateRange()
                 getDateRange()
-                extractTemperatureFromDateRange()
-
 
         })
             .catch(error => {
@@ -246,11 +244,31 @@ const HomePage = () => {
             const endDate = new Date(new Date().setDate(new Date().getDate() + 6)).toISOString().split("T")[0];
 
 
-            setStartDate(startingDate)
-            setEndDate(endingDate)
+            setStartDate(startDate)
+            setEndDate(endDate)
 
             console.log("starting date:", startDate)
             console.log("ending date:", endDate)
+
+            console.log("check data weather dawg", dataWeather)
+
+
+
+            const timestampAndTemp = weatherData1?.data?.list?.map(item => ({
+                timestamp: item?.dt,
+                temperature: item?.main?.temp
+              }));
+              
+              console.log(timestampAndTemp);
+              
+              
+
+            // if ( day1 >= startingDate && day1 <= endingDate){
+            //     console.log("this is true", day1)
+
+            // }else{
+            //     console.log("check again")
+            // }
 
             // Filter for items within the date range
             return weatherData1?.list?.filter(list => {
@@ -258,6 +276,8 @@ const HomePage = () => {
                  return itemDate >= startDate && itemDate <= endDate;
                 
             });
+
+
         };        
         
         useEffect(() => {
@@ -272,25 +292,6 @@ const HomePage = () => {
             }
         }, [weatherData1]);
 
-
-
-        const extractTemperatureFromDateRange =  () => {
-
-            // if (!dataWeather && !weatherInput) return;
-            // for (let i = 0; i < dataWeather.length; i++) {
-            //     if (day1 >= startDate && day1 <= endDate && dataWeather && weatherInput){
-            //         dataWeather.forEach((values) => {
-            //         // console.log("checking mapping dataWeather", dataWeather)
-            //         const checkingThisvaluesYeah =  values?.[1].main?.temp
-            //         console.log("check mic 1, 2", checkingThisvaluesYeah)
-            //         console.log("trying to get values", dataWeather)
-            //         // setCheckingThisValuesYeahState(checkingThisvaluesYeah)
-            //         })
-            //     }
-            //         }
-
-            console.log("Trying to check if dataWeather available",dataWeather)
-        }
 
 
 
@@ -319,11 +320,11 @@ const HomePage = () => {
             const twoDaysFromTomorrowDate = twoDaysFromTomorrow.toISOString().split('T')[0]
             const threeDaysFromTomorrowDate = threeDaysFromTomorrow.toISOString().split('T')[0]
 
-            console.log(tomorrowsDate);
-            console.log(nextTomorrowDate)
-            console.log(dayAfterNextTomorrowDate)
-            console.log(twoDaysFromTomorrowDate)
-            console.log(threeDaysFromTomorrowDate)
+            // console.log(tomorrowsDate);
+            // console.log(nextTomorrowDate)
+            // console.log(dayAfterNextTomorrowDate)
+            // console.log(twoDaysFromTomorrowDate)
+            // console.log(threeDaysFromTomorrowDate)
 
             setDay1(tomorrowsDate)
             setDay2(nextTomorrowDate)
