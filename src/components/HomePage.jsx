@@ -253,7 +253,9 @@ const HomePage = () => {
             console.log("check data weather dawg", dataWeather)
 
 
+            // if ( day1 >= startingDate && day1 <= endingDate){
 
+           
             const weatherData = weatherData1; // Array of 40 weather data objects
 
                 for (let i = 0; i < weatherData?.list?.length; i++) {
@@ -264,14 +266,15 @@ const HomePage = () => {
                 console.log(`Timestamp: ${timestamp}, Temperature: ${temperature}`);
                 }
 
+
+            // }
+            
               
 
-            // if ( day1 >= startingDate && day1 <= endingDate){
             //     console.log("this is true", day1)
 
             // }else{
             //     console.log("check again")
-            // }
 
             // Filter for items within the date range
             return weatherData1?.list?.filter(list => {
