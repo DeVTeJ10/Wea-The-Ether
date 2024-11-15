@@ -254,13 +254,16 @@ const HomePage = () => {
 
 
 
-            const timestampAndTemp = weatherData1?.data?.list?.map(item => ({
-                timestamp: item?.dt,
-                temperature: item?.main?.temp
-              }));
-              
-              console.log(timestampAndTemp);
-              
+            const weatherData = weatherData1; // Array of 40 weather data objects
+
+                for (let i = 0; i < weatherData?.list?.length; i++) {
+                const item = weatherData?.list[i];
+                const timestamp = item.dt;
+                const temperature = item.main.temp;
+
+                console.log(`Timestamp: ${timestamp}, Temperature: ${temperature}`);
+                }
+
               
 
             // if ( day1 >= startingDate && day1 <= endingDate){
