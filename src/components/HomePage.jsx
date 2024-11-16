@@ -43,15 +43,12 @@ const HomePage = () => {
     let [dataWeather] = useState([""])
     
 
-    let [day1Temp, setDay1Temp] = useState("")
-    let [day2Temp, setDay2Temp] = useState("")
-    let [day3Temp, setDay3Temp] = useState("")
-    let [day4Temp, setDay4Temp] = useState("")
-    let [day5Temp, setDay5Temp] = useState("")
-    let [day6Temp, setDay6Temp] = useState("")
-
-
-    const [checkingThisValuesYeahState, setCheckingThisValuesYeahState] = useState(null);
+    let [day1Temp, setDay1Temp] = useState([""])
+    let [day2Temp, setDay2Temp] = useState([""])
+    let [day3Temp, setDay3Temp] = useState([""])
+    let [day4Temp, setDay4Temp] = useState([""])
+    let [day5Temp, setDay5Temp] = useState([""])
+    let [day6Temp, setDay6Temp] = useState([""])
 
 
 
@@ -247,43 +244,44 @@ const HomePage = () => {
             setStartDate(startDate)
             setEndDate(endDate)
 
-            console.log("starting date:", startDate)
-            console.log("ending date:", endDate)
 
-            console.log("check data weather dawg", dataWeather)
-
-
-            // if ( day1 >= startingDate && day1 <= endingDate){
-
-           
             const weatherData = weatherData1; // Array of 40 weather data objects
 
                 for (let i = 0; i < weatherData?.list?.length; i++) {
                 const item = weatherData?.list[i];
-                const timestamp = item.dt;
-                const temperature = item.main.temp;
+                const temperature1 = item.main.temp;
+                // const temperature2 = item.main.temp
 
-                console.log(`Timestamp: ${timestamp}, Temperature: ${temperature}`);
+                    if ( day1 >= startingDate && day1 <= endingDate){
+                        for(let i = 0; i<day1.length; i++){
+                            day1Temp.push(item.main.temp)
+                        }
+                        setDay1Temp(temperature1)
+                        // console.log(`Temperature: ${temperature1}`);
+                        console.log("checking day 1 temp", day1Temp)
+                    }else{
+                        console.log("try again")
+                    }
+
+                    // if ( day2 >= startingDate && day2 <= endingDate){
+                    //     for(let i = 0; i<day2.length; i++){
+                    //         day2Temp.push(item.main.temp)
+                    //     }
+                    //     setDay2Temp(temperature2)
+                    //     // console.log(`Temperature: ${temperature2}`);
+                    //     console.log("checking day 1 temp", day1Temp, "checking day 2 temp",day2Temp)
+                    // }else{
+                    //     console.log("try again")
+                    // }
                 }
-
-
-            // }
             
-              
-
-            //     console.log("this is true", day1)
-
-            // }else{
-            //     console.log("check again")
-
+            
             // Filter for items within the date range
             return weatherData1?.list?.filter(list => {
                 const itemDate = new Date(list?.dt_txt).toISOString().split("T")[0];
                  return itemDate >= startDate && itemDate <= endDate;
                 
             });
-
-
         };        
         
         useEffect(() => {
@@ -293,7 +291,7 @@ const HomePage = () => {
                 extractDataForDateRange()
                 const filteredData = extractDataForDateRange(weatherData1)
                 dataWeather.push(filteredData)
-                console.log("Available weather data:", filteredData)
+                // console.log("Available weather data:", filteredData)
                 getDateRange()
             }
         }, [weatherData1]);
@@ -326,11 +324,6 @@ const HomePage = () => {
             const twoDaysFromTomorrowDate = twoDaysFromTomorrow.toISOString().split('T')[0]
             const threeDaysFromTomorrowDate = threeDaysFromTomorrow.toISOString().split('T')[0]
 
-            // console.log(tomorrowsDate);
-            // console.log(nextTomorrowDate)
-            // console.log(dayAfterNextTomorrowDate)
-            // console.log(twoDaysFromTomorrowDate)
-            // console.log(threeDaysFromTomorrowDate)
 
             setDay1(tomorrowsDate)
             setDay2(nextTomorrowDate)
@@ -342,7 +335,7 @@ const HomePage = () => {
             useEffect(() => {
                 if (weatherData1 && weatherInput && dataWeather){
                     getDateRange(); 
-                    console.log("checking data forecast 1st day",day1)
+                    // console.log("checking data forecast 1st day",day1)
                 }
             }, [weatherData1]);
 
