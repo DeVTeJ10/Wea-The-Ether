@@ -263,16 +263,6 @@ const HomePage = () => {
                         console.log("try again")
                     }
 
-                    // if ( day2 >= startingDate && day2 <= endingDate){
-                    //     for(let i = 0; i<day2.length; i++){
-                    //         day2Temp.push(item.main.temp)
-                    //     }
-                    //     setDay2Temp(temperature2)
-                    //     // console.log(`Temperature: ${temperature2}`);
-                    //     console.log("checking day 1 temp", day1Temp, "checking day 2 temp",day2Temp)
-                    // }else{
-                    //     console.log("try again")
-                    // }
                 }
             
             
