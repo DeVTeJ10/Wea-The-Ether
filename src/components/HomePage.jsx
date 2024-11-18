@@ -113,8 +113,9 @@ const HomePage = () => {
                 processHourlyForecast()
                 displayImage()
                 displayForecastImage()
-                extractDataForDateRange()
+                // extractDataForDateRange()
                 getDateRange()
+                groupByDate()
 
         })
             .catch(error => {
@@ -231,65 +232,115 @@ const HomePage = () => {
 
 
 
-        const extractDataForDateRange =  (weatherData1) => {  // 1) This function is setting the startdate and endate of possible 
-            // Calculate the dynamic start and end dates      // contd... from (1) available data, "itemDate" then maps through
-                                                              // contd... from (1- -) list.dt_txt and compares the date to start
-                                                              // cont... from (1- - -) and end date. 
-                                                              // cont... from (1 - - - -) (this function only gives me a range of dates ...)
-            if(!weatherData1 && !dataWeather && !weatherInput) return
-            const startDate = new Date().toISOString().split("T")[0];
-            const endDate = new Date(new Date().setDate(new Date().getDate() + 6)).toISOString().split("T")[0];
+        // const extractDataForDateRange =  (weatherData1) => {  // 1) This function is setting the startdate and endate of possible 
+        //     // Calculate the dynamic start and end dates      // contd... from (1) available data, "itemDate" then maps through
+        //                                                       // contd... from (1- -) list.dt_txt and compares the date to start
+        //                                                       // cont... from (1- - -) and end date. 
+        //                                                       // cont... from (1 - - - -) (this function only gives me a range of dates ...)
+        //     if(!weatherData1 && !dataWeather && !weatherInput) return
+        //     const startDate = new Date().toISOString().split("T")[0];
+        //     const endDate = new Date(new Date().setDate(new Date().getDate() + 6)).toISOString().split("T")[0];
 
 
-            setStartDate(startDate)
-            setEndDate(endDate)
+        //     setStartDate(startDate)
+        //     setEndDate(endDate)
 
 
-            const weatherData = weatherData1; // Array of 40 weather data objects
+        //     const weatherData = weatherData1; // Array of 40 weather data objects
 
-                for (let i = 0; i < weatherData?.list?.length; i++) {
-                const item = weatherData?.list[i];
-                const temperature1 = item.main.temp;
-                // const temperature2 = item.main.temp
+        //         for (let i = 0; i < weatherData?.list?.length; i++) {
+        //         const item = weatherData?.list[i];
+        //         const temperature1 = item.main.temp;
+        //         // const temperature2 = item.main.temp
 
-                    if ( day1 >= startingDate && day1 <= endingDate){
-                        for(let i = 0; i<day1.length; i++){
-                            day1Temp.push(item.main.temp)
-                        }
-                        setDay1Temp(temperature1)
-                        // console.log(`Temperature: ${temperature1}`);
-                        console.log("checking day 1 temp", day1Temp)
-                    }else{
-                        console.log("try again")
-                    }
+        //             if ( day1 >= startingDate && day1 <= endingDate){
+        //                 for(let i = 0; i<day1.length; i++){
+        //                     day1Temp.push(temperature1)
+        //                 }
+        //                 setDay1Temp(temperature1)
+        //                 // console.log(`Temperature: ${temperature1}`);
+        //                 console.log("checking day 1 temp", day1Temp)
+        //             }else{
+        //                 console.log("try again")
+        //             }
 
-                }
+        //         }
+                  
             
             
-            // Filter for items within the date range
-            return weatherData1?.list?.filter(list => {
-                const itemDate = new Date(list?.dt_txt).toISOString().split("T")[0];
-                 return itemDate >= startDate && itemDate <= endDate;
+        //     // Filter for items within the date range
+        //     return weatherData1?.list?.filter(list => {
+        //         const itemDate = new Date(list?.dt_txt).toISOString().split("T")[0];
+        //          return itemDate >= startDate && itemDate <= endDate;
                 
-            });
-        };        
+        //     });
+        // };        
         
-        useEffect(() => {
-            if (!weatherData1 && !weatherInput && dataWeather) {
-                return
-            }else{
-                extractDataForDateRange()
-                const filteredData = extractDataForDateRange(weatherData1)
-                dataWeather.push(filteredData)
-                // console.log("Available weather data:", filteredData)
-                getDateRange()
+        // useEffect(() => {
+        //     if (!weatherData1 && !weatherInput && dataWeather) {
+        //         return
+        //     }else{
+        //         extractDataForDateRange()
+        //         const filteredData = extractDataForDateRange(weatherData1)
+        //         dataWeather.push(filteredData)
+        //         // console.log("Available weather data:", filteredData)
+        //         getDateRange()
+        //     }
+        // }, [weatherData1]);
+
+
+
+        const groupByDate = (weatherData1) => {
+          
+            // Validate that weatherData1.list is an object
+            if (typeof weatherData1?.list !== "object" || weatherData1?.list === null) {
+              console.error("Invalid data passed to groupByDate:", weatherData1?.list);
+              return {}; // Return an empty object if the input is invalid
+            }
+          
+            const result = groupByDate(weatherData1);
+            console.log(result)
+          
+            // Iterate through the object
+            for (const [key, item] of Object.entries(weatherData1?.list)) {
+              console.log("Key:", key, "Item:", item);
+          
+              const rawDt = item?.dt;
+              const date = new Date(rawDt * 1000).toISOString().split("T")[0];
+              const temp = item?.main?.temp;
+          
+              console.log("Date:", date);
+              console.log("Temperature:", temp);
+          
+              // Skip invalid temperature entries
+              if (temp === undefined) {
+                console.warn("Skipping item due to missing temperature:", item);
+                continue;
+              }
+          
+              // Create the date group if it doesn't exist
+              if (!result[date]) {
+                result[date] = { date, temps: [] };
+              }
+          
+              // Add the temperature to the group
+              result[date].temps.push(temp);
+            }
+            console.log("Final grouped result:", result); // Log the result
+            return result;
+          };
+
+          useEffect(() => {
+            if (weatherData1 && weatherInput){
+                groupByDate(); 
+                console.log(weatherData1?.list)
             }
         }, [weatherData1]);
+          
+          
 
-
-
-
-
+          
+          
 
         const getDateRange = () => {
 
