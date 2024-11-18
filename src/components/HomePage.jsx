@@ -521,7 +521,7 @@ const HomePage = () => {
                             return (
                           <div key={key} className="weekdaystempo">
                           <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
-                          <h3 className="degrees">{`${totalDeg/value?.length}C`}</h3>
+                          <h3 className="degrees">{ `${Math.round( totalDeg)/value?.length}C`}</h3>
                           <h3 className="degrees">{key}</h3>
                       </div>  
                         )})}
