@@ -366,7 +366,7 @@ const HomePage = () => {
                         let totalDeg = 0
                         value?.forEach((v) => {
                             totalDeg = totalDeg + v?.main?.temp
-                            
+                            totalDeg = Math.round(totalDeg * 100) /100
                         })
                             return (
                           <div key={key} className="weekdaystempo">
