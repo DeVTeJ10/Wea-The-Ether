@@ -60,8 +60,40 @@
         padding-right: 110px;
         padding-top: 30px;
         border-radius: 20px;
-
     }
+
+    .checktemps{
+        display: flex;
+        /* flex-direction: column; */
+        align-items: center;
+        gap: 200px;
+        justify-content: center;
+        margin-top: 0px;
+        padding-top: 40px;
+        /* border: 0.5px solid white; */
+        /* border-radius: 20px; */
+        /* background-color: teal; */
+    }
+
+    .citydetails{
+        color: white;
+        text-align: center;
+        margin-top: -20px;
+        margin-bottom: -120px;
+    }
+
+    .checktemps{
+        display: flex;
+        /* flex-direction: column; */
+        align-items: center;
+        gap: 200px;
+        justify-content: center;
+        margin-top: 0px;
+        padding-top: 4000px;
+        /* border: 0.5px solid white; */
+        border-radius: 20px;
+    }
+
   }
 
 .ThankGod{
@@ -94,20 +126,7 @@
     color: white;
 }
 
-@media (max-width: 480px) {
-    .checktemps{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 200px;
-        justify-content: center;
-        margin-top: 0px;
-        padding-top: 40px;
-        border: 0.5px solid white;
-        border-radius: 20px;
-        background-color: teal;
-    }
-  }
+
 .checktemps{
     display: flex;
     align-items: center;
