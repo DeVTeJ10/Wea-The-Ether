@@ -30,36 +30,8 @@ const HomePage = () => {
     const [forecastHour5, setForecastHour5] = useState("")
 
 
-    const [day1, setDay1] = useState("")
-    const [day2, setDay2] = useState("")
-    const [day3, setDay3] = useState("")
-    const [day4, setDay4] = useState("")
-    const [day5, setDay5] = useState("")
-
-    const [startingDate, setStartDate] = useState("")
-    const [endingDate, setEndDate] = useState("")
-
-
-    let [dataWeather] = useState([""])
-    
-
-    let [day1Temp, setDay1Temp] = useState([""])
-    let [day2Temp, setDay2Temp] = useState([""])
-    let [day3Temp, setDay3Temp] = useState([""])
-    let [day4Temp, setDay4Temp] = useState([""])
-    let [day5Temp, setDay5Temp] = useState([""])
-    let [day6Temp, setDay6Temp] = useState([""])
-
-
     const [avgTemp, setAvgTemp] = useState({})
     
-
-
-
-
-    // let weatherdata = useState([])
-
-
     const apiKey = 'b96e0a473aed03ed2ffcdd3d32e5f323' // Api key needed for both apis to work
 
 
@@ -117,9 +89,6 @@ const HomePage = () => {
                 processHourlyForecast()
                 displayImage()
                 displayForecastImage()
-                // extractDataForDateRange()
-                // groupByDate()
-
         })
             .catch(error => {
                 console.error('Error', error)
@@ -239,7 +208,6 @@ const HomePage = () => {
                 let checkerDate;
                 let dateCat = {}
                 for (let index = 0; index < weatherData1?.list?.length; index++) {
-                    console.log("loop running")
                     const element = weatherData1?.list[index];
                     let elementDate = element?.dt_txt?.split(" ")[0]
                     if(!checkerDate) {
@@ -257,7 +225,6 @@ const HomePage = () => {
                     }
                     
                 }
-                console.log("renew data", dateCat)
             
                 return dateCat;
             }
@@ -265,9 +232,6 @@ const HomePage = () => {
             useEffect( () => {
               let _renewD = aragmenbtAction()
               setAvgTemp(_renewD)
-            //   parseFloat(avgTemp.toFixed(2))
-              console.log("weatherData1", weatherData1)
-        
             }, [weatherData1])
             
 
@@ -275,7 +239,6 @@ const HomePage = () => {
 
 
 
-    
   return (
 
     <div>
@@ -294,9 +257,6 @@ const HomePage = () => {
             </div>
         </div>
 
-    {/* <div>
-        
-    </div> */}
 
         <div className="ThankGod">
         <div className="checktemps">
