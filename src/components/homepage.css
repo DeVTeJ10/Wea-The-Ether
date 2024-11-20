@@ -110,13 +110,39 @@
 
     .forsmallerscreen2{
         display: flex;
+        gap: 30px;
     }
 
     .forsmallerscreen3{
         display: none;
     }
 
+    .finaltemp{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+        justify-content: center;
+        margin-top: -20px;
+        color: white;
+        padding-left: 80px;
+    }
+
   }
+
+    .forsmallerscreen1{
+        display: flex;
+        /* gap: 30px; */
+    }
+
+    .forsmallerscreen2{
+        display: flex;
+    }
+
+    .forsmallerscreen3{
+        /* display: none; */
+    }
+
 
   .citydetails{
     color: white;
