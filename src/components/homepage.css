@@ -30,10 +30,7 @@
     gap: 0px;
     align-items: center;
 }
-/* 
-.hourlydesc{
-    display: flex;
-} */
+
 
 .iconic{
     margin-top: -20px;
@@ -48,16 +45,13 @@
 
 }
 
-.citydetails{
-    color: white;
-    text-align: center;
-    margin-top: -50px;
-}
 
 @media (max-width: 480px) {
     .ThankGod{
-        padding-left: 110px;
-        padding-right: 110px;
+        /* display: flex; */
+        /* flex-direction: column; */
+        padding-left: 10px;
+        /* padding-right: 110px; */
         padding-top: 30px;
         border-radius: 20px;
     }
@@ -68,8 +62,8 @@
         align-items: center;
         gap: 200px;
         justify-content: center;
-        margin-top: 0px;
-        padding-top: 40px;
+        /* margin-top: 0px; */
+        /* padding-top: 400px; */
         /* border: 0.5px solid white; */
         /* border-radius: 20px; */
         /* background-color: teal; */
@@ -82,39 +76,59 @@
         margin-bottom: -120px;
     }
 
-    .checktemps{
+    .daysdetails{
         display: flex;
-        /* flex-direction: column; */
-        align-items: center;
-        gap: 200px;
-        justify-content: center;
-        margin-top: 0px;
-        padding-top: 4000px;
-        /* border: 0.5px solid white; */
+        gap: 50px;
+        /* align-items: center; */
+        color: white;
+    }
+
+    .ThankGod{
+        /* padding-left: 110px; */
+        /* padding-right: 110px; */
+        padding-top: 30px;
         border-radius: 20px;
     }
 
+    
+    .forecasthour{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        border: 0.3px solid white;
+        border-radius: 20px;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .forsmallerscreen1{
+        display: flex;
+        gap: 30px;
+    }
+
+    .forsmallerscreen2{
+        display: flex;
+    }
+
+    .forsmallerscreen3{
+        display: none;
+    }
+
   }
+
+  .citydetails{
+    color: white;
+    text-align: center;
+    margin-top: -50px;
+}
 
 .ThankGod{
     padding-left: 110px;
     padding-right: 110px;
     padding-top: 30px;
     border-radius: 20px;
-}
-
-.citiesdetails{
-    color: white;
-    border: 0.3px solid white;
-    border-color: white;
-    border-radius: 50px;
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-bottom: 20px;
-    padding-top: 40px;
-    width: 310px;
-    text-align: center;
-    margin-top: 30px;
 }
 
 
@@ -238,5 +252,4 @@
     gap: 20px;
     margin-bottom: -30px ;
 
-    /* margin-top: -20px; */
 }
