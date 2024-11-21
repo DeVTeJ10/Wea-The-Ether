@@ -258,7 +258,8 @@ const HomePage = () => {
         </div>
 
 
-        <div className="ThankGod">
+    <div className="mostDevnitly">
+    <div className="ThankGod">
         <div className="checktemps">
                 <div className="detailsofcity" >
                     <div className="detailscity">
@@ -311,8 +312,8 @@ const HomePage = () => {
                 </div>
                 </div>
         </div>
+    </div>
 
-  
         <div className="foresighter">
         <div className="hourlydayforcaster">
             <h3 className="forcaster">5 days forecast</h3>

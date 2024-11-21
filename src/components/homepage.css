@@ -48,25 +48,12 @@
 
 @media (max-width: 480px) {
     .ThankGod{
-        /* display: flex; */
-        /* flex-direction: column; */
-        padding-left: 10px;
-        /* padding-right: 110px; */
+        display: flex;
+        flex-direction: column;
+        /* padding-left: 10px; */
+        /* align-items: center; */
         padding-top: 30px;
         border-radius: 20px;
-    }
-
-    .checktemps{
-        display: flex;
-        /* flex-direction: column; */
-        align-items: center;
-        gap: 200px;
-        justify-content: center;
-        /* margin-top: 0px; */
-        /* padding-top: 400px; */
-        /* border: 0.5px solid white; */
-        /* border-radius: 20px; */
-        /* background-color: teal; */
     }
 
     .citydetails{
@@ -81,13 +68,6 @@
         gap: 50px;
         /* align-items: center; */
         color: white;
-    }
-
-    .ThankGod{
-        /* padding-left: 110px; */
-        /* padding-right: 110px; */
-        padding-top: 30px;
-        border-radius: 20px;
     }
 
     
@@ -127,6 +107,25 @@
         color: white;
         padding-left: 80px;
     }
+
+    .mostDevnitly{
+        display: block;
+    }
+
+    .checktemps{
+        /* display: flex; */
+        /* align-items: center; */
+        /* gap: 200px; */
+        justify-content: center;
+        margin-top: 0px;
+        padding-top: 40px;
+        border: none !important, 
+        border-radius: 20px;
+    }
+
+  }
+
+  .mostDevnitly{
 
   }
 
