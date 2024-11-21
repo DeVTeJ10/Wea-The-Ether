@@ -292,19 +292,21 @@ const HomePage = () => {
                 </div>
  
                 <div>
-                    <div>
+                    <div className="humidity">
                     <h4>humidity:</h4>
                     <h3>{weatherData2?.main?.humidity}</h3>
                     </div>
-                    <div>
+                    <div className="pressure">
                     <h4>Pressure:</h4>
                     <h3>{weatherData2?.main?.pressure}</h3>
                     </div>
                     
                 </div>
-                <div className="wind">
+                <div className="windSpeed">
                     <h4>windspeed:</h4>
                     <h3>{weatherData2?.wind?.speed}</h3>
+                </div>
+                <div className="windGust">
                     <h4>Wind gust:</h4>
                     <h3>{weatherData2?.wind?.gust}</h3>
                 </div>

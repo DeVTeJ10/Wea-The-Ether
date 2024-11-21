@@ -8,20 +8,8 @@
 }
 
 
-.weatherBTN{
-    color: white;
-    background-color: purple;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-radius: 10px;
-    border: 0px;
-}
-
 .gotitman{
     display: flex;
-    /* flex-direction: column; */
 }
 
 .tetherwe{
@@ -50,8 +38,6 @@
     .ThankGod{
         display: flex;
         flex-direction: column;
-        /* padding-left: 10px; */
-        /* align-items: center; */
         padding-top: 30px;
         border-radius: 20px;
     }
@@ -65,9 +51,20 @@
 
     .daysdetails{
         display: flex;
-        gap: 50px;
-        /* align-items: center; */
+        flex-direction: column;
         color: white;
+    }
+
+    .weatherBTN{
+        display: none;
+        color: white;
+        background-color: purple;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-radius: 10px;
+        border: 0px;
     }
 
     
@@ -113,32 +110,49 @@
     }
 
     .checktemps{
-        /* display: flex; */
-        /* align-items: center; */
-        /* gap: 200px; */
+        display: flex; 
+        flex-direction: column;
         justify-content: center;
         margin-top: 0px;
         padding-top: 40px;
         border: none !important
     }
 
+    .humidity{
+        display: flex;
+    }
+
+    .pressure{
+        display: flex;
+    }
+
+    .windSpeed{
+        display: flex;
+    }
+
+    .windGust{
+        display: flex;
+    }
+
   }
 
-  .mostDevnitly{
-
-  }
+  .weatherBTN{
+    color: white;
+    background-color: purple;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    border: 0px;
+}
 
     .forsmallerscreen1{
         display: flex;
-        /* gap: 30px; */
     }
 
     .forsmallerscreen2{
         display: flex;
-    }
-
-    .forsmallerscreen3{
-        /* display: none; */
     }
 
 
@@ -197,7 +211,6 @@
 }
 
 .foresighter{
-    /* padding-left: 80px; */
     padding-right: 80px;
 }
 
@@ -208,7 +221,6 @@
     padding-left: 30px;
     padding-right: 30px;
     padding-top: 10px;
-    /* padding-bottom: 10px; *//
 }
 
 .hourly{
@@ -259,7 +271,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /* gap: 630px; */
     margin-top: 20px;
     margin-bottom: 10px;
     padding-left: 80px;
@@ -272,7 +283,6 @@
 
 .longlati{
     display: flex;
-    /* flex-direction: column; */
     gap: 20px;
     margin-bottom: -30px ;
 
