@@ -253,7 +253,6 @@ const HomePage = () => {
                     type="text">
                 </input>
             </form>
-            <button className="weatherBTN" type="submit">Enter</button>
             </div>
         </div>
 
@@ -302,6 +301,7 @@ const HomePage = () => {
                     </div>
                     
                 </div>
+                <div className="speedGust">
                 <div className="windSpeed">
                     <h4>windspeed:</h4>
                     <h3>{weatherData2?.wind?.speed}</h3>
@@ -313,16 +313,18 @@ const HomePage = () => {
                 </div>
                 </div>
                 </div>
+                </div>
         </div>
     </div>
 
         <div className="foresighter">
-        <div className="hourlydayforcaster">
-            <h3 className="forcaster">5 days forecast</h3>
-            <h3 className="forehour">Todays Hourly Forecast</h3>
+            <div>
+
             </div>
-        
+        <div className="hourlydayforcaster">
+            </div>
                 <div className="finaltemp">
+            <h3 className="forcaster">5 day forecast</h3>
                     <div className="weektemperature">
                         {Object.entries(avgTemp)?.map(([key, value]) =>  {
                         let totalDeg = 0
@@ -336,66 +338,42 @@ const HomePage = () => {
                           <h3 className="degrees">{key}</h3>
                       </div>  
                         )})}
-                    {/* <div className="weekdaystempo">
-                        <div style={{ width: "30.72px", height: "30.72px" }}>
-                          { displayForecastImg1 && <img src={windspeed} width={30.72} height={30.72} alt="Star 1" />}
-                        </div>
-                        <h3 className="degrees">20C</h3>
-                        <h3 className="degrees">{day1}</h3>
                     </div>
-                    <div className="weekdaystempo">
-                        <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
-                        <h3 className="degrees">20C</h3>
-                        <h3 className="degrees">{day2}</h3>
-                    </div>
-                    <div className="weekdaystempo">
-                        <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
-                        <h3 className="degrees">20C</h3>
-                        <h3 className="degrees">{day3}</h3>
-                    </div>
-                    <div className="weekdaystempo">
-                        <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
-                        <h3 className="degrees">20C</h3>
-                        <h3 className="degrees">{day4}</h3>
-                    </div>
-                    <div className="weekdaystempo">
-                        <img src={windspeed} width={30.72} height={30.72} alt="Star 3" />
-                        <h3 className="degrees">20C</h3>
-                        <h3 className="degrees">{day5}</h3>
-                    </div> */}
-                    </div>
- 
- 
-                <div className="hourcasterfors">
-                <div className="hourcasterfor">
-                    <div className="forecasthour">
-                        <div className="forsmallerscreen1">
+
+
+
+            <div className="tentoesgenius">
+            <h3 className="forehour">Todays Hourly Forecast</h3>
+                    <div className="hourcasterfors">
+                    <div className="hourcasterfor">
+                        <div className="forecasthour">
+                            <div className="forsmallerscreen1">
+                                <div className="Hourlyforecast">
+                                    <h3>{forecastHour1}:00</h3>
+                                    <img src={displayForecastImg1} width={30.72} height={30.72} alt="Star 3" />
+                                    <h3 className="hourly">{weatherData1?.list[0]?.main?.feels_like}c</h3>
+                                    <h5 className="hourlydesc">{weatherData1?.list[0]?.weather[0]?.description}</h5>
+                                    <h5 className="hourly">Humidity is: {weatherData1?.list[0]?.main?.humidity}</h5>
+                                </div>
+                                <div className="Hourlyforecast">
+                                    <h3>{forecastHour2}:00</h3> 
+                                    <img src={displayForecastImg2} width={30.72} height={30.72} alt="Star 3" />
+                                    <h3 className="hourly">{weatherData1?.list[1]?.main?.feels_like}c</h3>
+                                    <h5 className="hourlydesc">{weatherData1?.list[1]?.weather[0]?.description}</h5>
+                                    <h5 className="hourly">Humidity is: {weatherData1?.list[1]?.main?.humidity}</h5>
+                                </div>
+                            </div>
+                            <div className="forsmallerscreen2">
                             <div className="Hourlyforecast">
-                                <h3>{forecastHour1}:00</h3>
-                                <img src={displayForecastImg1} width={30.72} height={30.72} alt="Star 3" />
-                                <h3 className="hourly">{weatherData1?.list[0]?.main?.feels_like}c</h3>
-                                <h5 className="hourlydesc">{weatherData1?.list[0]?.weather[0]?.description}</h5>
-                                <h5 className="hourly">Humidity is: {weatherData1?.list[0]?.main?.humidity}</h5>
+                                <h3>{forecastHour3}:00</h3>
+                                <img src={displayForecastImg3} width={30.72} height={30.72} alt="Star 3" />
+                                <h3 className="hourly">{weatherData1?.list[2]?.main?.feels_like}c</h3>
+                                <h5 className="hourlydesc">{weatherData1?.list[2]?.weather[0]?.description}</h5>
+                                <h5 className="hourly">Humidity is: {weatherData1?.list[2]?.main?.humidity}</h5>
                             </div>
                             <div className="Hourlyforecast">
-                                <h3>{forecastHour2}:00</h3> 
-                                <img src={displayForecastImg2} width={30.72} height={30.72} alt="Star 3" />
-                                <h3 className="hourly">{weatherData1?.list[1]?.main?.feels_like}c</h3>
-                                <h5 className="hourlydesc">{weatherData1?.list[1]?.weather[0]?.description}</h5>
-                                <h5 className="hourly">Humidity is: {weatherData1?.list[1]?.main?.humidity}</h5>
-                            </div>
-                        </div>
-                        <div className="forsmallerscreen2">
-                        <div className="Hourlyforecast">
-                            <h3>{forecastHour3}:00</h3>
-                            <img src={displayForecastImg3} width={30.72} height={30.72} alt="Star 3" />
-                            <h3 className="hourly">{weatherData1?.list[2]?.main?.feels_like}c</h3>
-                            <h5 className="hourlydesc">{weatherData1?.list[2]?.weather[0]?.description}</h5>
-                            <h5 className="hourly">Humidity is: {weatherData1?.list[2]?.main?.humidity}</h5>
-                        </div>
-                        <div className="Hourlyforecast">
-                            <h3>{forecastHour4}:00</h3>
-                            <img src={displayForecastImg4} width={30.72} height={30.72} alt="Star 3" />
+                                <h3>{forecastHour4}:00</h3>
+                                <img src={displayForecastImg4} width={30.72} height={30.72} alt="Star 3" />
                             <h3 className="hourly">{weatherData1?.list[3]?.main?.feels_like}c</h3>
                             <h5 className="hourlydesc">{weatherData1?.list[3]?.weather[0]?.description}</h5>
                             <h5 className="hourly">Humidity is: {weatherData1?.list[3]?.main?.humidity}</h5>
@@ -413,6 +391,7 @@ const HomePage = () => {
                     </div>
                 </div>
                 </div>
+            </div>
                     </div>
         </div>
     </div>
