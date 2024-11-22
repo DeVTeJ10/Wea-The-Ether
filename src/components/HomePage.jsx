@@ -272,7 +272,7 @@ const HomePage = () => {
  
                 <div className="detailsDay">
                 <div className="daysdetails">
-                <div>
+                <div className="sunrisesunset">
                     <div className="sunrise">
                         <h4>Sunrise:</h4>
                         <h4 id="Sunrise">{localSunriseTime}</h4>
@@ -291,7 +291,8 @@ const HomePage = () => {
                     <h3 className="iconic">{weatherData2?.weather?.[0]?.description}</h3>
                 </div>
  
-                <div>
+            <div className="humidPressure">
+            <div>
                     <div className="humidity">
                     <h4>humidity:</h4>
                     <h3>{weatherData2?.main?.humidity}</h3>
@@ -312,6 +313,7 @@ const HomePage = () => {
                     <h3>{weatherData2?.wind?.gust}</h3>
                 </div>
                 </div>
+            </div>
                 </div>
                 </div>
                 </div>

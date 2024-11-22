@@ -115,11 +115,11 @@
     }
 
     .windSpeed{
-        display: flex; !important
+        /* display: flex; !important */
     }
 
    .windGust{
-    display: flex; !important
+    /* display: flex; !important */
    }
 
    .tentoesgenius{
@@ -144,6 +144,24 @@
     margin-top: 20px;
     margin-bottom: 10px;
 }
+
+.humidPressure{
+    display: flex;
+    gap: 30px;
+    margin-top: -20px;
+}
+
+.sunrisesunset{
+    margin-top: -50px;
+}
+
+  }
+
+  .sunrisesunset{
+
+  }
+
+  .humidPressure{
 
   }
 
