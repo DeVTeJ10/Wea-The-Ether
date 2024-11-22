@@ -356,14 +356,14 @@ const HomePage = () => {
                             <div className="forsmallerscreen1">
                                 <div className="Hourlyforecast">
                                     <h3>{forecastHour1}:00</h3>
-                                    <img src={displayForecastImg1} width={30.72} height={30.72} alt="Star 3" />
+                                    {displayIconic &&<img src={displayForecastImg1} width={30.72} height={30.72} alt="Star 3" />}
                                     <h3 className="hourly">{weatherData1?.list[0]?.main?.feels_like}c</h3>
                                     <h5 className="hourlydesc">{weatherData1?.list[0]?.weather[0]?.description}</h5>
                                     <h5 className="hourly">Humidity is: {weatherData1?.list[0]?.main?.humidity}</h5>
                                 </div>
                                 <div className="Hourlyforecast">
                                     <h3>{forecastHour2}:00</h3> 
-                                    <img src={displayForecastImg2} width={30.72} height={30.72} alt="Star 3" />
+                                    {displayIconic &&<img src={displayForecastImg2} width={30.72} height={30.72} alt="Star 3" />}
                                     <h3 className="hourly">{weatherData1?.list[1]?.main?.feels_like}c</h3>
                                     <h5 className="hourlydesc">{weatherData1?.list[1]?.weather[0]?.description}</h5>
                                     <h5 className="hourly">Humidity is: {weatherData1?.list[1]?.main?.humidity}</h5>
@@ -372,14 +372,14 @@ const HomePage = () => {
                             <div className="forsmallerscreen2">
                             <div className="Hourlyforecast">
                                 <h3>{forecastHour3}:00</h3>
-                                <img src={displayForecastImg3} width={30.72} height={30.72} alt="Star 3" />
+                                {displayIconic &&<img src={displayForecastImg3} width={30.72} height={30.72} alt="Star 3" />}
                                 <h3 className="hourly">{weatherData1?.list[2]?.main?.feels_like}c</h3>
                                 <h5 className="hourlydesc">{weatherData1?.list[2]?.weather[0]?.description}</h5>
                                 <h5 className="hourly">Humidity is: {weatherData1?.list[2]?.main?.humidity}</h5>
                             </div>
                             <div className="Hourlyforecast">
                                 <h3>{forecastHour4}:00</h3>
-                                <img src={displayForecastImg4} width={30.72} height={30.72} alt="Star 3" />
+                                {displayIconic &&<img src={displayForecastImg4} width={30.72} height={30.72} alt="Star 3" />}
                             <h3 className="hourly">{weatherData1?.list[3]?.main?.feels_like}c</h3>
                             <h5 className="hourlydesc">{weatherData1?.list[3]?.weather[0]?.description}</h5>
                             <h5 className="hourly">Humidity is: {weatherData1?.list[3]?.main?.humidity}</h5>
@@ -388,7 +388,7 @@ const HomePage = () => {
                         <div className="forsmallerscreen3">
                         <div className="Hourlyforecast">
                             <h3>{forecastHour5}:00</h3>
-                            <img src={displayForecastImg5} width={30.72} height={30.72} alt="Star 3" />
+                            {displayIconic &&<img src={displayForecastImg5} width={30.72} height={30.72} alt="Star 3" />}
                             <h3 className="hourly">{weatherData1?.list[4]?.main?.feels_like}c</h3>
                             <h5 className="hourlydesc">{weatherData1?.list[4]?.weather[0]?.description}</h5>
                             <h5 className="hourly">Humidity is: {weatherData1?.list[4]?.main?.humidity}</h5>
