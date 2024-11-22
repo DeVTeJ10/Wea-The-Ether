@@ -281,7 +281,7 @@ const HomePage = () => {
                         <h4>Sunset:</h4>
                         <h4 id="Sunset">{localSunsetTime} </h4>
                     </div>
-                    <h3>Feels like: {weatherData2?.main?.temp}</h3>
+                    <h3 className="feelslike">Feels like: {weatherData2?.main?.temp}</h3>
                 </div>
  
                 <div className="tetherwe">

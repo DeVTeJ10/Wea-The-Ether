@@ -130,6 +130,7 @@
 }
 
 .forcaster{
+    
     margin-left: 20px;
     margin-bottom: 20px;
     display: flex;
@@ -148,15 +149,28 @@
 .humidPressure{
     display: flex;
     gap: 30px;
-    margin-top: -20px;
+    margin-top: -40px;
+    border: 0.5px solid white;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .sunrisesunset{
-    margin-top: -50px;
+    margin-top: -80px;
+    border: 0.5px solid white;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .TeJthis{
     margin-top: 100px;
+}
+
+.feelslike{
+    display: flex;
+    justify-content: center;
 }
 
   }
