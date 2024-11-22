@@ -265,7 +265,7 @@ const HomePage = () => {
                         <div className="citydetails">
                             <h2>The Latitude for {weatherData2?.name} in {weatherData2?.sys?.country} is: {weatherData2?.coord?.lat} with longitude: {weatherData2?.coord?.lon}</h2>
                             {displayIconic && <img src={displayIconic} width={150} height={150} alt="Star 3" />}
-                            <h1>{weatherData2?.weather?.[0]?.description}</h1>
+                            <h1 className="wedescription">{weatherData2?.weather?.[0]?.description}</h1>
                         </div>
                     </div>
                 </div>
