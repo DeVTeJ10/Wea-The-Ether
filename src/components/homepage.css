@@ -130,7 +130,7 @@
 }
 
 .forcaster{
-    margin-left: -190px;
+    margin-left: -10px;
     margin-bottom: 20px;
     display: flex;
     white-space: nowrap;
@@ -292,7 +292,7 @@
 }
 
 .forcaster{
-    padding-left: 270px;
+    padding-left: 80px;
     color: white;
 }
 
