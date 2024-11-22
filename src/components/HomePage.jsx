@@ -324,8 +324,10 @@ const HomePage = () => {
         <div className="hourlydayforcaster">
             </div>
                 <div className="finaltemp">
+
+            <div className="TeJthis">
             <h3 className="forcaster">5 day forecast</h3>
-                    <div className="weektemperature">
+                        <div className="weektemperature">
                         {Object.entries(avgTemp)?.map(([key, value]) =>  {
                         let totalDeg = 0
                         value?.forEach((v) => {
@@ -339,6 +341,7 @@ const HomePage = () => {
                       </div>  
                         )})}
                     </div>
+            </div>
 
 
 
