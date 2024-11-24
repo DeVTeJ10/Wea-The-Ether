@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "./homepage.css"
-import windspeed from "../Images/windspeed.png"
+// import windspeed from "../Images/windspeed.png"
 
 
 
@@ -334,8 +334,8 @@ const HomePage = () => {
                         {Object.entries(avgTemp)?.map(([key, value]) =>  {
                         let totalDeg = 0
                         value?.forEach((v) => {
-                            totalDeg = totalDeg + v?.main?.temp-273.15
-                            totalDeg = Math.round(totalDeg * 1000) /1000
+                            totalDeg = totalDeg + v?.main?.temp
+                            totalDeg = totalDeg * 10000 / 10000
                         })
                             return (
                           <div key={key} className="weekdaystempo">
